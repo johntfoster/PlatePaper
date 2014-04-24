@@ -1,0 +1,96 @@
+\begin{thebibliography}{10}
+\expandafter\ifx\csname url\endcsname\relax
+  \def\url#1{\texttt{#1}}\fi
+\expandafter\ifx\csname urlprefix\endcsname\relax\def\urlprefix{URL }\fi
+\expandafter\ifx\csname href\endcsname\relax
+  \def\href#1#2{#2} \def\path#1{#1}\fi
+
+\bibitem{silling2007peridynamic}
+S.~Silling, M.~Epton, O.~Weckner, J.~Xu, E.~Askari, Peridynamic states and
+  constitutive modeling, Journal of Elasticity 88~(2) (2007) 151--184.
+\newblock \href {http://dx.doi.org/10.1007/s10659-007-9125-1}
+  {\path{doi:10.1007/s10659-007-9125-1}}.
+
+\bibitem{silling2005meshfree}
+S.~A. Silling, E.~Askari, A meshfree method based on the peridynamic model of
+  solid mechanics, Computers \& Structures 83~(17) (2005) 1526--1535.
+\newblock \href {http://dx.doi.org/10.1016/j.compstruc.2004.11.026}
+  {\path{doi:10.1016/j.compstruc.2004.11.026}}.
+
+\bibitem{gerstle2007peridynamic}
+W.~Gerstle, N.~Sau, S.~Silling, Peridynamic modeling of concrete structures,
+  Nuclear engineering and design 237~(12) (2007) 1250--1258.
+\newblock \href {http://dx.doi.org/10.1016/j.nucengdes.2006.10.002}
+  {\path{doi:10.1016/j.nucengdes.2006.10.002}}.
+
+\bibitem{silling2003deformation}
+S.~A. Silling, M.~Zimmermann, R.~Abeyaratne, Deformation of a peridynamic bar,
+  Journal of Elasticity 73~(1-3) (2003) 173--190.
+
+\bibitem{silling2005peridynamic}
+S.~A. Silling, F.~Bobaru, Peridynamic modeling of membranes and fibers,
+  International Journal of Non-Linear Mechanics 40~(2) (2005) 395--409.
+\newblock \href {http://dx.doi.org/10.1016/j.ijnonlinmec.2004.08.004}
+  {\path{doi:10.1016/j.ijnonlinmec.2004.08.004}}.
+
+\bibitem{taylor2013two}
+M.~Taylor, D.~J. Steigmann, A two-dimensional peridynamic model for thin
+  plates, Mathematics and Mechanics of Solids\href
+  {http://dx.doi.org/10.1177/1081286513512925}
+  {\path{doi:10.1177/1081286513512925}}.
+
+\bibitem{ansari2010nonlocal}
+R.~Ansari, S.~Sahmani, B.~Arash, Nonlocal plate model for free vibrations of
+  single-layered graphene sheets, Physics Letters A 375~(1) (2010) 53--62.
+\newblock \href {http://dx.doi.org/10.1016/j.physleta.2010.10.028}
+  {\path{doi:10.1016/j.physleta.2010.10.028}}.
+
+\bibitem{silling2000reformulation}
+S.~Silling, Reformulation of elasticity theory for discontinuities and
+  long-range forces, Journal of the Mechanics and Physics of Solids 48~(1)
+  (2000) 175--209.
+\newblock \href {http://dx.doi.org/10.1016/S0022-5096(99)00029-0}
+  {\path{doi:10.1016/S0022-5096(99)00029-0}}.
+
+\bibitem{kroner1967elasticity}
+E.~Kr{\"o}ner, Elasticity theory of materials with long range cohesive forces,
+  International Journal of Solids and Structures 3~(5) (1967) 731--742.
+\newblock \href {http://dx.doi.org/10.1016/0020-7683(67)90049-2}
+  {\path{doi:10.1016/0020-7683(67)90049-2}}.
+
+\bibitem{eringen1972nonlocal}
+A.~Eringen, D.~Edelen, On nonlocal elasticity, International Journal of
+  Engineering Science 10~(3) (1972) 233--248.
+\newblock \href {http://dx.doi.org/10.1016/0020-7225(72)90039-0}
+  {\path{doi:10.1016/0020-7225(72)90039-0}}.
+
+\bibitem{silling2010peridynamic}
+S.~Silling, R.~Lehoucq, Peridynamic theory of solid mechanics, Advances in
+  Applied Mechanics 44 (2010) 73--168.
+\newblock \href {http://dx.doi.org/10.1016/S0065-2156(10)44002-8}
+  {\path{doi:10.1016/S0065-2156(10)44002-8}}.
+
+\bibitem{foster2010viscoplasticity}
+J.~Foster, S.~Silling, W.~Chen, Viscoplasticity using peridynamics,
+  International Journal for Numerical Methods in Engineering 81~(10) (2010)
+  1242--1258.
+\newblock \href {http://dx.doi.org/10.1002/nme.2725}
+  {\path{doi:10.1002/nme.2725}}.
+
+\bibitem{warren2009non}
+T.~Warren, S.~Silling, A.~Askari, O.~Weckner, M.~Epton, J.~Xu, A non-ordinary
+  state-based peridynamic method to model solid material deformation and
+  fracture, International Journal of Solids and Structures 46~(5) (2009)
+  1186--1195.
+\newblock \href {http://dx.doi.org/10.1016/j.ijsolstr.2008.10.029}
+  {\path{doi:10.1016/j.ijsolstr.2008.10.029}}.
+
+\bibitem{fischer1992bending}
+T.~M. Fischer, Bending stiffness of lipid bilayers. iii. gaussian curvature,
+  Journal de Physique II 2~(3) (1992) 337--343.
+
+\bibitem{timoshenko1959theory}
+S.~Timoshenko, S.~Woinowsky-Krieger, S.~Woinowsky, Theory of plates and shells,
+  Vol.~2, McGraw-hill New York, 1959.
+
+\end{thebibliography}
