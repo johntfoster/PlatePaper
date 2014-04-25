@@ -19,6 +19,7 @@
 \usepackage{xfrac}
 \usepackage{import}
 \usepackage[section]{placeins}
+\usepackage[color=red!40, textsize=scriptsize]{todonotes}
 
 \usepackage{cleveref}
 %\usepackage{autonum}
@@ -69,10 +70,8 @@
 \address[utsa]{The University of Texas at San Antonio, One UTSA Circle, San Antonio, TX 78249}
 
 \begin{abstract}
-This paper builds on the peridynamic state based beam model to represent the bending of a Kirckhoff-Love plate.
-This model is non-ordinary and derived from the concept of a rotational spring between bonds.
-A simple extension of the beam model reproduces plate bending with a poisson ratio of \(\nu=\sfrac{1}{3}\), which can be combined with a 2D linear peridynamic solid model to simulate mixed in-plane and transverse loading.
-The addition of an isotropic bending state term extends the model to arbitrary poisson ratios.
+This paper builds on the peridynamic state based beam model to represent the bending of a Kirckhoff-Love plate.  This model is non-ordinary and derived from the concept of a rotational spring between bonds.
+A simple extension of the beam model reproduces plate bending with a Poisson ratio of \(\nu=\sfrac{1}{3}\), which can be combined with a 2D linear peridynamic solid model to simulate mixed in-plane and transverse loading.  The addition of an isotropic bending state term extends the model to arbitrary Poisson ratios.
 Simple test cases demonstrate the model's performance.
 \end{abstract}
 
@@ -83,54 +82,33 @@ peridynamics \sep non-ordinary model \sep non-local model
 \end{frontmatter}
 
 \section{Introduction}
-A goal of many mechanical engineering analyses is the prediction and description of material failure.
-When processes such as fracture are modeled, the partial-differential equations of classical mechanics are ill-defined at the resulting discontinuities in displacement.  
-A peridynamic formulation of continuum mechanics casts material behavior in terms of integral functions of displacement (as opposed to gradients of displacement), so that discontinuities can evolve naturally and require no special treatment.  
-Various peridynamic material models capture the deformation behavior of 3-dimensional solid objects \cite{silling2007peridynamic, silling2005meshfree, gerstle2007peridynamic}, but would be very expensive to implement for a thin plate or beam, as the thru-thickness discretization requirement to properly capture resistance to bending would be prohibitively expensive in a computational setting for a long, slender structural object.  
-Other peridynamic models capture tension and compression in 1D bars\cite{silling2003deformation} and 2D membranes\cite{silling2005peridynamic}, but these features do not resist transverse displacement.  
-A recent paper by Taylor and Steigmann \cite{taylor2013two} reduces a bond based 3D plate to two dimensions with an integral through the plate's thickness. 
-This creates a model that can represent thin structures and includes a bending term, but is used to simulate tension loading. 
-The model is limited to the 3D bond-based Poisson ratio \(\nu=\sfrac{1}{4}\), though the same technique could be applied to a state-based model at the expense of complexity.
+\todo{Lets not start this paper with the exact same paragraph as the last paper.} A goal of many mechanical engineering analyses is the prediction and description of material failure.  When processes such as fracture are modeled, the partial-differential equations of classical mechanics are ill-defined at the resulting discontinuities in displacement.  A peridynamic formulation of continuum mechanics casts material behavior in terms of integral functions of displacement (as opposed to gradients of displacement), so that discontinuities can evolve naturally and require no special treatment.  Various peridynamic material models capture the deformation behavior of 3-dimensional solid objects \cite{silling2007peridynamic, silling2005meshfree, gerstle2007peridynamic}, but would be very expensive to implement for a thin plate or beam, as the thru-thickness discretization requirement to properly capture resistance to bending would be prohibitively expensive in a computational setting for a long, slender structural object.  Other peridynamic models capture tension and compression in 1D bars\cite{silling2003deformation} and 2D membranes\cite{silling2005peridynamic}, but these features do not resist transverse displacement.  A recent paper by Taylor and Steigmann \cite{taylor2013two} reduces a bond based 3D plate to two dimensions with an integral through the plate's thickness.  This creates a model that can represent thin structures and includes a bending term, but is used to simulate tension loading.  The model is limited to the 3D bond-based Poisson ratio \(\nu=\sfrac{1}{4}\), though the same technique could be applied to a state-based model at the expense of complexity.
 A nonlocal plate model by Ansari et al. \cite{ansari2010nonlocal} applies Eringen elasticity to Mindlin plate theory, an approach which captures scale effects but imposes stricter continuity requirements.
 
-Instead of developing new equations of motion, previous work by the authors of this article took a different approach, developing a constitutive model that directly resists bending while maintaining the same conservation of momentum equation as the 3D model.
-The resulting bending model was shown to reproduce Euler-Bernoulli beam bending based on either linear elasticity or Eringen elasticity.
+Instead of developing new equations of motion, previous work by the authors of this article took a different approach, developing a constitutive model that directly resists bending while maintaining the same conservation of momentum equation as the 3D model.  The resulting bending model was shown to reproduce Euler-Bernoulli beam bending based on either linear elasticity or Eringen elasticity.
 
-This paper extends the author's previous work on 1D beams to model the bending of a flat Kirckhoff-Love plate.
-The resulting 1-parameter model is constrained to a poisson ratio \(\nu=\sfrac{1}{3}\).
-The model is combined with an extension-based model to capture the impact of in-plane forces on bending behavior.
-By introducing an isotropic bending state, the model is extended to any valid poisson ratio.
-In addition to directly modeling a thin flat plate in bending, the simple plate case lays the theoretical framework for more complex peridynamic plate and shell bending models.
-Because many analyses of interest are partly or wholly comprised of these types of features, their development is an important addition to the capabilities of peridynamic analysis.
+This paper extends the author's previous work on 1D beams to model the bending of a flat Kirckhoff-Love plate.  The resulting 1-parameter model is constrained to a Poisson ratio \(\nu=\sfrac{1}{3}\).  The model is combined with an extension-based model to capture the effect of in-plane forces on bending behavior.  By introducing an \emph{isotropic bending-state}, the model is extended to any valid Poisson ratio.  In addition to directly modeling a thin flat plate in bending, the simple plate case lays the theoretical framework for more complex peridynamic plate and shell bending models.  Because many analyses of interest are partly or wholly comprised of these types of features, their development is an important addition to the capabilities of peridynamic analysis.
 
-The second section of this paper provides a brief introduction to peridynamics, including state based models.
-The third section presents the state based plate model and demonstrates equivalence to 1-parameter classical Kirckhoff-Love plate theory in the limit of shrinking nonlocality.
-Also in the third section, the bending model is combined with an extension-based model to resist both in-plane and out-of-plane deformations.
-The fourth section introduces the isotropic bending state and extends the plate to arbitrary poisson ratios.
-The fifth section demonstrates the model with simple test cases.
+The second section of this paper provides a brief introduction to peridynamics, including state-based models.  The third section presents the state based plate model and demonstrates equivalence to 1-parameter classical Kirckhoff-Love plate theory in the limit of vanishing nonlocality.  Also in the third section, the bending model is combined with an extension-based model to resist both in-plane and out-of-plane deformations.  The fourth section introduces the isotropic bending-state and extends the plate to arbitrary Poisson ratios.  The fifth section demonstrates the model with simple test cases.
+
 %
 \section{Peridynamics}
 \label{sec:PDintro}
-The term \textit{peridynamic} alludes to the fact that the force at a point is affected by nearby material configuration and was coined by Silling to describe the new formulation of continuum mechanics he developed in \cite{silling2000reformulation}.
-Weakly nonlocal continuum mechanics models date to the work of Kr\"oner \cite{kroner1967elasticity} and of Eringen and Edelen \cite{eringen1972nonlocal}, and include higher-order displacement derivatives.
-These higher-order derivatives impose stronger continuity requirements than the classical model. 
-By contrast, the peridynamic model is strongly nonlocal and casts material behavior at a point as the \textit{integral} equation 
+\todo{Again, not word-for-word} The term \textit{peridynamic} alludes to the fact that the force at a point is affected by nearby material configuration and was coined by Silling to describe the new formulation of continuum mechanics he originally developed in \cite{silling2000reformulation}.  Weakly nonlocal continuum mechanics models date to the work of Kr\"oner \cite{kroner1967elasticity} and of Eringen and Edelen \cite{eringen1972nonlocal}, and include higher-order displacement derivatives.  These higher-order derivatives impose stronger continuity requirements than the classical models.  By contrast, the peridynamic model is strongly nonlocal and casts material behavior at a point as the \textit{integral} equation 
 %
 \begin{equation}
     \label{eq:PDCoPV}
-    \rho(\mathbf{x})\ddot{\mathbf{u}}(\mathbf{x}) = \int_\Omega \mathbi{f}(\mathbf{x},\mathbf{q}) dV_\mathbf{q}  + \mathbf{b}(\mathbf{x}) \notag
+    \rho(\mathbf{x})\ddot{\mathbf{u}}(\mathbf{x}) = \int_\Omega \mathbi{f}(\mathbf{x},\mathbf{q}) {\rm d}V_\mathbf{q}  + \mathbf{b}(\mathbf{x}) \notag
 \end{equation}
 %
-rather than the classical \textit{partial-differential equation}.
-Instead of the divergence of stress, we have the integral of a ``force" function $\mathbi{f}$ of the position vector $\mathbf{x}$ and the position vector $\mathbf{q}$ of a point within the body domain $\Omega$. 
-This force functional may depend on \(\mathbf{x}\), \(\mathbf{q}\), their deformed positions, the original and deformed positions of other points in \(\Omega\), history, etc.
+rather than the classical \textit{partial-differential equation}.  Instead of the divergence of stress, we have the integral of a ``force'' functional $\mathbi{f}$ of the position vector $\mathbf{x}$ and the position vector $\mathbf{q}$ of a point within the body domain $\Omega$.  This force functional may depend on \(\mathbf{x}\), \(\mathbf{q}\), their deformed positions, the original and deformed positions of other points in \(\Omega\), history, etc.
 
-Constitutive modeling of a wide variety of materials is accomplished by choosing the appropriate form for the force function.  While the simplest force functions recreate a one-parameter linear elastic solid material \cite{silling2000reformulation}, other force functions can be used to model nonlinear elasticity, plasticity, damage, and other behaviors \cite{silling2005peridynamic}.
+Constitutive modeling of a wide variety of materials is accomplished by choosing the appropriate form for the force function.  While the simplest force functions recreate a one-parameter linear elastic solid material \cite{silling2000reformulation}, other force functions can be used to model nonlinear elasticity, plasticity, damage, and other behaviors \cite{silling2005peridynamic, silling2007peridynamic, foster2010viscoplasticity}\todo{Cite several more papers here, including your forthcoming beam paper}.
 
-To describe force functionals that incorporate the behavior of a totality of points in the nearby material (not just $\mathbf{x}$ and $\mathbf{q}$), we must introduce the concept of a peridynamic state.
+To describe force functionals that incorporate the behavior of a totality of points in the nearby material (not just $\mathbf{x}$ and $\mathbf{q}$), we must introduce the concept of a peridynamic \emph{state}.
 
-Introduced by Silling et al.\ in 2007~\cite{silling2007peridynamic}, states are functions of the behavior of the continuum points surrounding each location.
-The most common states are scalar-states and vector-states which are scalar and vector valued, respectively.
+Introduced by Silling et al.\ \cite{silling2007peridynamic}, states are functions of the behavior of the continuum points surrounding each location.  The most common states are \emph{scalar-states} and \emph{vector-states} which are scalar and vector valued, respectively.
+
 Unlike a second order tensor, which can only map vectors linearly to other vectors, vector-states can produce nonlinear or even discontinuous mappings.  Important properties of states are magnitude and direction, while important operations include the addition and decomposition of states, inner and tensor products, and the Fr\'{e}chet derivative of a function with respect to a state \cite{silling2007peridynamic}.
 
 Conservation of linear momentum in the \textit{state-based} peridynamic formulation results in the equation of motion,
@@ -149,11 +127,7 @@ The deformed image of the vector $(\mathbf{q-x})$ is defined as the \textit{defo
 \end{equation}
 %
 
-Just as stress and strain are work conjugate, so too are the force and deformation vector states for hyperelastic materials.
-If the force state $\vstate{T}{}{}$ is always in the same direction as the deformation state $\vstate{Y}{}{}$, then the force exerted by a ``bond'' between points is in the same direction as the deformed bond, and the model is called \textit{ordinary}.  
-Models in which they are not in the same direction are called \textit{non-ordinary}.
-Silling et al. demonstrate the possibility of such models in \cite{silling2010peridynamic}, but very little work has touched on their use.
-Foster et al. \cite{foster2010viscoplasticity} and Warren et. al. \cite{warren2009non} show that correspondence models, which approximate the deformation gradient and use it to calculate bond forces, result in non-ordinary state based constitutive models for deformation with large rotation.
+Just as stress and strain are work conjugate, so too are the force and deformation vector states for hyperelastic materials.  If the force state $\vstate{T}{}{}$ is always in the same direction as the deformation state $\vstate{Y}{}{}$, then the force exerted by a ``bond'' between points is in the same direction as the deformed bond, and the model is called \textit{ordinary}.  Models in which they are not in the same direction are called \textit{non-ordinary}.  Silling et al.\ discussed the possibility of such models in \cite{silling2010peridynamic}, but very little work has touched on their use.  Foster et al.\ \cite{foster2010viscoplasticity} and Warren et al.\ \cite{warren2009non} showed that correspondence models, which approximate a deformation gradient and use it to calculate bond forces based on classical constitutive models, result in non-ordinary state based constitutive models for finite deformations.
 %
 %\FloatBarrier
 \section{Model Development}
