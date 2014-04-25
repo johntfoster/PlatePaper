@@ -38,7 +38,7 @@ git pull
 ### Creating a LaTeX diff from the repository
 
 ```
-latexdiff-vc -r 207e8e9 --math-markup=0 BeamPaper.tex
+latexdiff-vc -c ld.cfg -r 207e8e9 --math-markup=0 PlatePaper.tex
 ````
 
 where `207e8e9` should be replaced with the correct `git` commit.
