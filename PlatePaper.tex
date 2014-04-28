@@ -412,15 +412,35 @@ Additionally, the simply-supported flat plate is a configuration with significan
 %
 \subsection{Results}
 The simplest test case for this model is a linear-elastic square plate with Poisson's ratio \(\nu = \sfrac{1}{3}\) that is simply-supported on all 4 sides with a uniform transverse pressure load on the entire surface between the supports.
-As expected from an energy-equivalent model, the slice along the plate's centerline shown in \cref{fig:elastic_plate} demonstrates good agreement between the static deflection predicted by the bond-pair model and that of classical linear elasticity.
+As expected from an energy-equivalent model, the slice along the plate's centerline shown in \cref{fig:plate_convergence_h} demonstrates good agreement between the static deflection predicted by the bond-pair model and that of classical linear elasticity as the horizon length shrinks.
+The minimum horizon size depends on the discretization; it appears that twice the node spacing is insufficient, and that three times the node spacing is sufficient.
+The difference is evident in \cref{fig:plate_minimum_h}.
+
+%
+\begin{figure}[h]
+  \centering
+  \resizebox{0.55\linewidth}{!}{\input{\plotpath/elasticPlate_convergence_h.pgf}}
+  \caption{The Bond-Pair Model Converges on Accurate Plate Deflection with Smaller Horizons}
+  \label{fig:plate_convergence_h}
+\end{figure}
+
+%
+\begin{figure}[h]
+  \centering
+  \resizebox{0.55\linewidth}{!}{\input{\plotpath/elasticPlate_minimum_h.pgf}}
+  \caption{Horizon Must Include Sufficient Nodes}
+  \label{fig:plate_minimum_h}
+\end{figure}
+
 Accurate results require a denser discretization than is the case for the elastic beams from previous work.
+\Cref{fig:plate_convergence_n} illustrates the model converging to the analytical solution as the discretization is made finer.
 
 %
 \begin{figure}[h]
   \centering
   \resizebox{0.55\linewidth}{!}{\input{\plotpath/elasticPlate_convergence_n.pgf}}
-  \caption{The Bond-Pair Model Converges on Accurate Plate Deflection}
-  \label{fig:elastic_plate}
+  \caption{The Bond-Pair Model Converges on Accurate Plate Deflection with Finer Dsicretization}
+  \label{fig:plate_convergence_n}
 \end{figure}
 
 The test case for the hybrid model is a similar simply-supported square plate with an additional in-plane tension load along two opposing sides.
