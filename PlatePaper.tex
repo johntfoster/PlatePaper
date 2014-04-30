@@ -193,16 +193,16 @@ where $z$ is the vertical displacement of material point.  Taking \(\boldsymbol{
 with
 %
 \begin{equation}
-    \kappa_1=\frac{\partial^2 z}{\partial x_1^2}, \kappa_2= \frac{\partial^2 z}{\partial x_2^2}, \kappa_3=\frac{\partial^2 z}{\partial x_1\partial x_2}\notag
+    \kappa_1=\frac{\partial^2 z}{\partial x_1^2}, \quad \kappa_2= \frac{\partial^2 z}{\partial x_2^2}, \quad \kappa_3=\frac{\partial^2 z}{\partial x_1\partial x_2}\notag
 \end{equation}
 %
 substituting eq.~(\ref{eq:beamdtheta2}) into the equation for the strain energy density of a single bond-pair,
 %
 \begin{align}
 %\label{eq:continuousBeamw}
-    w =& \omega(\boldsymbol{\xi}) \alpha \left[1+\cos(\theta(\vstate{Y}{}{\boldsymbol{\xi}},\vstate{Y}{}{\boldsymbol{-\xi}}) ) \right] \notag \\
-    =& \omega(\boldsymbol{\xi}) \alpha\frac{\xi^2}{8}(\kappa_1^2\cos^4(\phi)+\kappa_2^2\sin^4(\phi)+2\kappa_1\kappa_2\cos^2(\phi)\sin^2(\phi)+4\kappa_3^2\cos^2(\phi)\sin^2(\phi) \notag \\
-    & +4\kappa_1\kappa_3\cos^3(\phi)\sin(\phi)+4\kappa_2\kappa_3\cos(\phi)\sin^3(\phi))+\mathcal{O}(\xi^4).\notag
+    w &= \omega(\boldsymbol{\xi}) \alpha \left[1+\cos(\theta(\vstate{Y}{}{\boldsymbol{\xi}},\vstate{Y}{}{\boldsymbol{-\xi}}) ) \right] \notag \\
+    &= \omega(\boldsymbol{\xi}) \alpha\frac{\xi^2}{8}(\kappa_1^2\cos^4(\phi)+\kappa_2^2\sin^4(\phi)+2\kappa_1\kappa_2\cos^2(\phi)\sin^2(\phi)+4\kappa_3^2\cos^2(\phi)\sin^2(\phi) \notag \\
+    &+ 4\kappa_1\kappa_3\cos^3(\phi)\sin(\phi)+4\kappa_2\kappa_3\cos(\phi)\sin^3(\phi))+\mathcal{O}(\xi^4).\notag
 \end{align}
 %
 If we use a weighting function \(\omega(\boldsymbol{\xi})=\omega(\xi)\) and assume that the $\omega$ plays the role of a localization kernel, i.e. $\omega = 0 \; \forall \; \xi > \delta$, the resulting strain energy density, $W$, for any material point in the peridynamic plate is
@@ -217,9 +217,9 @@ Equating $W$ with the classical Kirchoff plate strain-energy density, $\Omega$, 
 %
 \begin{align}
     \lim_{\delta \to 0}  W &= \Omega, \notag \\
-    \alpha \frac{3 \pi}{8} m \left(\kappa_1^2+\kappa_2^2+\frac{2}{3}\kappa_1\kappa_1+\frac{4}{3}\kappa_3^2 \right)&= \frac{G h^3}{12(1-\nu)} \left(\kappa_1^2+\kappa_2^2+2\nu\kappa_1\kappa_1+2(1-\nu)\kappa_3^2 \right), \notag \\
+    \alpha \frac{3 \pi}{8} m \left(\kappa_1^2+\kappa_2^2+\frac{2}{3}\kappa_1\kappa_1+\frac{4}{3}\kappa_3^2 \right)&= \left[ \frac{G h^3}{12(1-\nu)} \left(\kappa_1^2+\kappa_2^2+2\nu\kappa_1\kappa_1+2(1-\nu)\kappa_3^2 \right) \right]_{\nu=1/3}, \notag \\
 %    \nu = \frac{1}{3},\:\: \alpha &= \frac{8}{3 \pi m} \frac{G h^3}{12(1-\nu)},
-    \nu = \frac{1}{3},\:\: \alpha &= \frac{16}{3 m} \frac{G h^3}{12(1-\sfrac{1}{3})},
+    \alpha &= \frac{2 G h^3}{3 m}, 
 \label{eq:alpha}
 \end{align}
 %
@@ -228,8 +228,8 @@ with
 %    m = \int_{0}^{\delta} \omega(\xi) \xi^3 {\rm d}\xi \notag.
     m = \int_{0}^{\delta} \int_{0}^{2\pi}\omega(\xi) \xi^2 \xi {\rm d}\phi {\rm d}\xi \notag.
 \end{equation}
-
-It should be noted that the restriction \(\nu=\sfrac{1}{3}\) is the same imposed by the use of a bond based peridynamic model for in-plane deformation of a 2D peridynamic plate.
+%
+where, $G$ is the shear modulus, $h$ is the thickness of the plate, and we have evaluated the classical Kirchoff strain-energy at a Poisson ratio of \(\sfrac{1}{3}\) in order to solve for alpha as a constant.  It should be noted that the restriction \(\nu=\sfrac{1}{3}\) is the same imposed by the use of a bond based peridynamic model for in-plane deformation of a 2D peridynamic plate. We will show an extension to this model that removes this restriction in Section~\ref{sec:arbitrary}.
 
 \subsection{Combining Bending and Extension Models}
 The bond-pair bending model does not resist deformations that preserve the angles between opposite bonds\todo{This reads a little funny, could we not say: \ldots resist in-plane stretching or shear deformation.}, such as in-plane stretch or shear \todo{or you might just say: \dots does not develop membrane forces.}.  If these behaviors are expected in combination with bending, a useful model must resist both.  To create a plate model that also resists these deformations, i.e.\ a flat shell, we combine the bond-pair model with a two-dimensional version of the original bond-based linearly-elastic peridynamic solid model from \cite{silling2000reformulation}.  In this model, individual bonds act as springs resisting changes in length.
@@ -254,12 +254,12 @@ By matching the energy of a plate in shear deformation, we can relate \(\beta\) 
     &=\frac{\beta}{2} \epsilon_{ij}^d \epsilon_{kl}^d \int_A \frac{ \omega(\xi)}{|\boldsymbol{\xi}|^2}\xi_i \xi_j \xi_k \xi_l \;{\rm d}A_{\boldsymbol{\xi}}.
 \end{align*}
 %
-With $i, j, k, l = 1,2$. For a circular $\omega$, combinations of $\{i,j,k,l\}$ with an odd number of any index, such as $\{1,1,1,2\}$ will integrate to 0.
+where $\epsilon^d$ is the deviatoric strain tensor.  Now, to evaluate the integral we will exploit the symmetry properties. With $i, j, k, l = 1,2$. For a circular $\omega$, combinations of $\{i,j,k,l\}$ with an odd number of any index, such as $\{1,1,1,2\}$ will integrate to 0.
 %
 \begin{align*}
 %    m&=(\underline{\omega}\:\underline{x}) \bullet \underline{x}\\
     m &= \int_A \omega(\xi)|\boldsymbol{\xi}|^2\; dA_{\boldsymbol{\xi}} \\
-    W^d_\text{PD} &= \frac{\beta \; m}{16}[3(\epsilon_{11}\epsilon_{11}+\epsilon_{22}\epsilon_{22})+(\epsilon_{11}\epsilon_{22}+\epsilon_{12}\epsilon_{12}+\epsilon_{12}\epsilon_{21}+\epsilon_{21}\epsilon_{12}+\epsilon_{21}\epsilon_{21}+\epsilon_{22}\epsilon_{11}]\\
+    W^d_\text{PD} &= \frac{\beta \; m}{16}[3(\epsilon_{11}\epsilon_{11}+\epsilon_{22}\epsilon_{22})+(\epsilon_{11}\epsilon_{22}+\epsilon_{12}\epsilon_{12}+\epsilon_{12}\epsilon_{21}+\epsilon_{21}\epsilon_{12}+\epsilon_{21}\epsilon_{21}+\epsilon_{22}\epsilon_{11})]\\
     &= \frac{\beta \; m}{16} \epsilon_{ij}^d \epsilon_{kl}^d (\delta_{ij}\delta_{kl}+\delta_{ik}\delta_{jl}+\delta_{il}\delta_{jk})\\
     &= \frac{\beta \; m}{8} \epsilon_{ij}^d \epsilon_{ij}^d \implies\\
      \beta &= \frac{8 \; G\;h}{m}
@@ -267,18 +267,19 @@ With $i, j, k, l = 1,2$. For a circular $\omega$, combinations of $\{i,j,k,l\}$ 
 %
 Having calibrated the bond-extension model to the shear modulus, applying a different uniform strain (such as might result from uniaxial tension) reveals the bond-based model to result in a one-parameter linearly-elastic model with Poisson's ratio \(\nu=\sfrac{1}{3}\).  
 
-Combining the bending and extension models allows for the description of more complex behaviors, particularly the stiffening effect of in-plane tension on the transverse bending of a plate.  Consider a single bond-pair in the combined model: 
+Combining the bending and extension models allows for the description of more complex behaviors, particularly the stiffening effect of in-plane tension on the transverse bending of a plate.  Consider a single bond-pair in the combined model shown in Fig.~\ref{fig:hybridmodel}.
 %
 \begin{figure}[tbp]
-  \label{fig:hybridmodel}
   \centering
   \input{\diagrampath/bondPairCombinedV.tex}
   \caption{The Hybrid Model Combines Bending and Extension Components}
+  \label{fig:hybridmodel}
 \end{figure}
 %
 As the two sides are pulled apart, the magnitude of the extension force in each bond increases, and the magnitude of the bending force decreases.  At the same time, the angle at which the extension force acts decreases, and the angle of action for the bending force increases.  For small amounts of bending and reasonable stretches, increased tension in the direction of the bond pair results in increase restorative force.
 
 \section{Extension to arbitrary Poisson ratio}
+\label{sec:arbitrary}
 Although many materials have Poisson ratios of \(\nu\approx \sfrac{1}{3}\), it is nonetheless desirable to extend the model to materials with arbitrary Poisson ratios.  For isotropic, linearly elastic models of solid materials, Silling et al.\ extended the peridynamic material model to arbitrary material parameters in \cite{silling2007peridynamic} by decomposing the deformation into isotropic and deviatoric components.  In the absence of plastic deformation, we need only find the difference between the strain energy of a deformed bond-based plate and the strain energy of an elastic plate with Poisson's ratio \(\nu \neq \sfrac{1}{3}\).  The difference is a function of the isotropic strain in two dimensions, \(\theta_2\)
 %
 \begin{align}
@@ -299,7 +300,7 @@ This decomposition method inspires a similar approach to our plate model. To per
     W'=&2G \frac{h^3}{12}\frac{3\nu-1}{1-\nu} \left(\frac{\kappa_1+\kappa_2}{2}\right)^2.\notag
 \end{align}
 %
-The discrepancy in energy is proportional to the square of average curvature, \(\frac{\kappa_1+\kappa_2}{2} = \bar{\kappa}\), which we will also refer to as the isotropic curvature.  The isotropic curvature can be envisioned as the portion of the deformation that resembles a spherical bowl.  A complete decomposition of bending energy into isotropic and deviatoric components as performed by Fischer in \cite{fischer1992bending} produces a far more complex model and is unnecessary at this time.  For a single bond pair we can represent the curvature vector along the bond pair as 
+The discrepancy in energy is proportional to the square of average curvature, \(\frac{\kappa_1+\kappa_2}{2} = \bar{\kappa}\), which we will also refer to as the isotropic curvature.  The isotropic curvature can be envisioned as the portion of the deformation that resembles a hemispherical bowl.  A complete decomposition of bending energy into isotropic and deviatoric components as performed by Fischer in \cite{fischer1992bending} produces a far more complex model and is unnecessary at this time.  For a single bond pair we can represent the curvature vector along the bond pair as 
 %\marginpar{ maybe leave this out and go straight to the curvature vector?}
 %
 \begin{equation}
@@ -311,34 +312,29 @@ The discrepancy in energy is proportional to the square of average curvature, \(
 %\end{equation}
 %
 For large rotations, we can define an average curvature vector \(\bar{\boldsymbol{\kappa}}\).
-This leads us to estimate the average curvature as 
+This leads us to model the average curvature as 
 %
 \begin{align}
     \bar{\boldsymbol{\kappa}} &= \frac{1}{m_2} \int_0^\delta \int_0^{2\pi}\psi(\xi)\frac{\vstate{Y}{}{\boldsymbol{\xi}}+\vstate{Y}{}{\boldsymbol{-\xi}}}{\xi^2} \xi {\rm d}\phi {\rm d}\xi ;\notag \\
     m_2 &= \int_0^\delta \int_0^{2\pi}\psi(\xi)\xi {\rm d}\phi {\rm d}\xi. \notag
 \end{align}
 %
-The weighting function \(\psi(\xi)\) performs a role similar to that of \(\omega(\xi)\) from the previous section, but need not be identical.
+\todo{I say, to avoid the question of ``How to you select $\psi$'', let's leave it equal to $\omega$ at this point.  Then $m$ is also identical.} The weighting function \(\psi(\xi)\) performs a role similar to that of \(\omega(\xi)\) from the previous section, but need not be identical.
 We can rewrite the energy discrepancy in terms of \(\bar{\boldsymbol{\kappa}}\).
 %
 \begin{equation}
     W'=2G\frac{h^3}{12}\frac{3\nu-1}{1-\nu}\frac{\bar{\boldsymbol{\kappa}}^2}{2}. \notag
 \end{equation}
 %
-We can take the Fr\'{e}chet derivative to produce a correction force vector state
+We can take the Fr\'{e}chet derivative \todo{Can you show the details in the Appendix?  Also, should the $dA$ be there?} to produce a correction force vector state
 %
 \begin{equation}
     \vstate{T'}{}{\boldsymbol{\xi}}=\frac{4G}{m_2}\frac{h^3}{12}\frac{3\nu-1}{1-\nu}\frac{\psi(\boldsymbol{\xi})}{\xi^2} \bar{\boldsymbol{\kappa}}\;dA,
     \label{eq:pressureState}
 \end{equation}
 %
-that is not directly dependent on the deformation of a single bond pair.
-Instead, \cref{eq:pressureState} represents a bond-length dependent ``pressure'' applied to every pair of bonds extending from a node.
-This ``pressure'' is proportional to the curvature vector at that node.
-A weighting function \(\psi(\boldsymbol{\xi}) = |\boldsymbol{\xi}|\) can ensure that the integral expression for force at a point is convergent.
-This extra term that is dependent on the bending of all the pairs around a node means that the extension is not properly a \textit{bond-pair} model.
-Instead, it would be more accurate to call it a \textit{bond-multiple} model, in which the bond forces and energies are functions of the relationship between a family of bonds.
-In either the continuous or discrete cases, this model extension requires the additional step of evaluating the isotropic curvature at each point, but the increased complexity of the extended model captures in the local limit the behavior of a two-parameter elastic material plate.
+that is not directly dependent on the deformation of a single bond pair.  Instead, \cref{eq:pressureState} represents a bond-length dependent ``pressure'' applied to every pair of bonds extending from a node.  This ``pressure'' is proportional to the curvature vector at that node.
+A weighting function \(\psi(\boldsymbol{\xi}) = |\boldsymbol{\xi}|\) can ensure that the integral expression for force at a point is convergent.  This extra term that is dependent on the bending of all the pairs around a material point means that the extension is not properly a \textit{bond-pair} model.  Instead, it would be more accurate to call it a \textit{bond-multiple} model, in which the bond forces and energies are functions of the relationship between a family of bonds.  In either the continuous or discrete cases, this model extension requires the additional step of evaluating the isotropic curvature at each point, but the increased complexity of the extended model captures in the local limit the behavior of a two-parameter elastic material plate.
 %
 \section{Numerical Simulation}
 \subsection{Discretized Model}
@@ -382,26 +378,16 @@ Implementing the 2-parameter model requires finding the isotropic curvature at e
     f^\text{iso}(\mathbf{x}) &= \sum_j \left\{\left[\alpha^\text{iso}(\mathbf{x})\bar{\boldsymbol{\kappa}}(\mathbf{x})-\alpha^\text{iso}(\mathbf{x}+\boldsymbol{\xi}_j)\bar{\boldsymbol{\kappa}}(\mathbf{x}+\boldsymbol{\xi}_j) \right] \frac{\omega(\boldsymbol{\xi}_j)}{\boldsymbol{\xi}_j^2} \right\}
 \end{align*}
 %
-Discretizing the bond-pair model as proposed above requires that nodes be evenly spaced throughout the entire plate, otherwise the displacement \(z(\mathbf{x}-\boldsymbol{\xi}_i)\) is ill-defined. 
-For this reason, the discretization does not allow for areas of higher and lower ``resolution''. 
+Discretizing the bond-pair model as proposed above requires that nodes be evenly spaced, $\Delta x$, throughout the entire plate, otherwise the displacement \(z(\mathbf{x}-\boldsymbol{\xi}_i)\) is ill-defined.  For this reason, the discretization does not allow for areas of higher and lower ``resolution''. An extension to this discretization that would allow changing mesh resolution will require interpolation between the nodes.  
 %
 \subsection{Numerical Method}
 \label{sec:NumMethod}
-Model behavior is evaluated by implementing the discretized equation of motion.
-The case of a square plate simply supported on all four sides is chosen for simplicity in both evaluation and comparison.
-To implement the simply-supported condition, it was sufficient to constrain the vertical displacement of each node along the plate's four edges.
-Boundary conditions such as clamped or guided supports and applied moments require careful treatment to ensure both meaningful results and ease of computation.
-While applying displacement constraints is straightforward, the appropriate way to apply an angle constraint or moment to a peridynamic point or collection of points is less obvious.
+Model behavior is evaluated by implementing the discretized equation of motion.  The case of a square plate simply supported on all four sides is chosen for simplicity in both evaluation and comparison.  To implement the simply-supported condition, it was sufficient to constrain the vertical displacement of each node along the plate's four edges.  Boundary conditions such as clamped or guided supports and applied moments require careful treatment to ensure both meaningful results and ease of computation.  While applying displacement constraints is straightforward, the appropriate way to apply an angle constraint or moment to a peridynamic point or collection of points is less obvious.
 
-Additionally, the simply-supported flat plate is a configuration with significant analytical treatment, making a better comparison case than configurations that may require comparison to finite element or other solution techniques.
+Additionally, the simply-supported flat plate is a configuration with significant analytical treatment in the classical theories, making a better comparison case than configurations that may require comparison to finite element or other solution techniques.
 %
 \subsection{Results}
-The simplest test case for this model is a linear-elastic square plate with Poisson's ratio \(\nu = \sfrac{1}{3}\) that is simply-supported on all 4 sides with a uniform transverse pressure load on the entire surface between the supports.
-As expected from an energy-equivalent model, the slice along the plate's centerline shown in \cref{fig:plate_convergence_h} demonstrates good agreement between the static deflection predicted by the bond-pair model and that of classical linear elasticity as the horizon length shrinks.
-This convergence only continues to a minimum horizon, below which the discretized equation of motion (\cref{eq:discreteEoM}) ceases to accurately approximate the continuous integral formulation (\cref{eq:PDstateEoM,eq:SillingForceNO}).
-The minimum horizon size depends on the discretization; it appears that twice the node spacing is insufficient, and that three times the node spacing is sufficient.
-The difference is evident in \cref{fig:plate_minimum_h}.
-
+The simplest test case for this model is a linear-elastic square plate with Poisson's ratio \(\nu = \sfrac{1}{3}\) that is simply-supported on all 4 sides with a uniform transverse pressure load on the entire surface between the supports.  As expected from an energy-equivalent model, the slice along the plate's centerline shown in \cref{fig:plate_convergence_h} demonstrates good agreement between the static deflection predicted by the bond-pair model and that of classical linear elasticity as the horizon length shrinks.  This convergence only continues to a minimum horizon, below which the discretized equation of motion (\cref{eq:discreteEoM}) ceases to accurately approximate the continuous integral formulation (\cref{eq:PDstateEoM,eq:SillingForceNO}).  The minimum horizon size depends on the discretization; it appears that twice the node spacing is insufficient, and that three times the node spacing is sufficient.  The difference is evident in \cref{fig:plate_minimum_h}.
 %
 \begin{figure}[h]
   \centering
@@ -409,7 +395,6 @@ The difference is evident in \cref{fig:plate_minimum_h}.
   \caption{The Bond-Pair Model Converges on Accurate Plate Deflection with Smaller Horizons}
   \label{fig:plate_convergence_h}
 \end{figure}
-
 %
 \begin{figure}[h]
   \centering
@@ -417,10 +402,8 @@ The difference is evident in \cref{fig:plate_minimum_h}.
   \caption{Horizon Must Include Sufficient Nodes}
   \label{fig:plate_minimum_h}
 \end{figure}
-
-Accurate results require a denser discretization than is the case for the elastic beams from previous work.
-\Cref{fig:plate_convergence_n} illustrates the model converging to the analytical solution as the discretization is made finer.
-
+%
+Accurate results require a denser discretization than is the case for the elastic beams from previous work.  \Cref{fig:plate_convergence_n} illustrates the model converging to the analytical solution as the discretization is made finer.
 %
 \begin{figure}[tbp]
   \centering
@@ -429,20 +412,17 @@ Accurate results require a denser discretization than is the case for the elasti
   \label{fig:plate_convergence_n}
 \end{figure}
 
-The test case for the hybrid model is a similar simply-supported square plate with an additional in-plane tension load along two opposing sides.
-An analytical solution for this combination of uniform transverse pressure and in-plane edge tension can be found in Timoshenko's book~\cite{timoshenko1959theory}.
-As is mechanically intuitive, increasing in-plane tension results in decreasing transverse displacement, while the opposite is true for compressive edge loading.
-Normalized to the the maximum displacement of a transversely-loaded plate with no in-plane edge loads, the results in \cref{fig:plateStiffening} show that the hybrid model does a good job of simulating the impact of in-plane tension on maximum transverse deflection.
-
+The test case for the hybrid model is a similar simply-supported square plate with an additional in-plane tension load along two opposing sides.  An analytical solution for this combination of uniform transverse pressure and in-plane edge tension can be found in Timoshenko's book~\cite{timoshenko1959theory}.  As is mechanically intuitive, increasing in-plane tension results in decreasing transverse displacement, while the opposite is true for compressive edge loading.  Normalized to the the maximum displacement of a transversely-loaded plate with no in-plane edge loads, the results in \cref{fig:plateStiffening} show that the hybrid model does a good job of simulating the impact of in-plane tension on maximum transverse deflection.\todo{We already spoke about this.  I would either make it match perfectly or remove the first point, otherwise it just begs a question from a reviewer.}
+%
 \begin{figure}[tbp]
   \centering
   \resizebox{0.55\linewidth}{!}{\input{\plotpath/plateStiffening.pgf}}
   \caption{The Combined Model Accurately Captures the Influence of In-Plane Tension}
   \label{fig:plateStiffening}
 \end{figure}
-
+%
 The bond-multiple plate model is motivated by the desire to extend the bending model to an arbitrary Poisson's ratio, so the obvious test for this model is the same as for the bond-pair model. When compared to analytical predictions, \cref{fig:plate_poisson} demonstrates the bond-multiple model's ability to simulate plates with Poisson's ratios that depart significantly from the bond-pair limitation of $\nu = \sfrac{1}{3}$.
-
+%
 \begin{figure}[tbp]
   \centering
   \resizebox{0.55\linewidth}{!}{\input{\plotpath/elasticPlatePoissonEffect.pgf}}
@@ -452,12 +432,7 @@ The bond-multiple plate model is motivated by the desire to extend the bending m
 
 
 \section{Conclusion}
-
-The non-ordinary bond-pair model is the first peridynamic material model to directly resist bending deformation.
-Previously introduced as a beam bending model, a simple extension to two dimensions is demonstrated to accurately simulate a simple Kirckhoff-Love plate example.
-When combined with a simple bond-stretch model, the hybrid model successfully reproduces the shell-stiffening behavior expected of a plate resisting combined in-plane and transverse loads.
-Calculating isotropic bending and extension states allows for a straightforward extension of both models to account for isotropic deformation energy and enables accurate modeling of plates with arbitrary Poisson's ratios.
-
+The non-ordinary bond-pair model is the first peridynamic material model to directly resist bending deformation.  Previously introduced as a beam bending model, a simple extension to two dimensions is demonstrated to accurately simulate a simple Kirckhoff-Love plate example.  When combined with a simple bond-stretch model, the hybrid model successfully reproduces the shell-stiffening behavior expected of a plate resisting combined in-plane and transverse loads.  Calculating isotropic bending and extension states allows for a straightforward extension of both models to account for isotropic deformation energy and enables accurate modeling of plates with arbitrary Poisson's ratios.
 
 \appendix
 \section{Fr\'echet Derivative}
