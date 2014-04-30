@@ -19,7 +19,7 @@
 \usepackage{xfrac}
 \usepackage{import}
 \usepackage[section]{placeins}
-\usepackage[color=red!40, textsize=scriptsize]{todonotes}
+\usepackage[color=red!40, textsize=scriptsize, textwidth=1.0in]{todonotes}
 
 \usepackage{cleveref}
 %\usepackage{autonum}
@@ -82,7 +82,7 @@ peridynamics \sep non-ordinary model \sep non-local model
 \end{frontmatter}
 
 \section{Introduction}
-\todo{Lets not start this paper with the exact same paragraph as the last paper.} A goal of many mechanical engineering analyses is the prediction and description of material failure.  When processes such as fracture are modeled, the partial-differential equations of classical mechanics are ill-defined at the resulting discontinuities in displacement.  A peridynamic formulation of continuum mechanics casts material behavior in terms of integral functions of displacement (as opposed to gradients of displacement), so that discontinuities can evolve naturally and require no special treatment.  Various peridynamic material models capture the deformation behavior of 3-dimensional solid objects \cite{silling2007peridynamic, silling2005meshfree, gerstle2007peridynamic}, but would be very expensive to implement for a thin plate or beam, as the thru-thickness discretization requirement to properly capture resistance to bending would be prohibitively expensive in a computational setting for a long, slender structural object.  Other peridynamic models capture tension and compression in 1D bars\cite{silling2003deformation} and 2D membranes\cite{silling2005peridynamic}, but these features do not resist transverse displacement.  A recent paper by Taylor and Steigmann \cite{taylor2013two} reduces a bond based 3D plate to two dimensions with an integral through the plate's thickness.  This creates a model that can represent thin structures and includes a bending term, but is used to simulate tension loading.  The model is limited to the 3D bond-based Poisson ratio \(\nu=\sfrac{1}{4}\), though the same technique could be applied to a state-based model at the expense of complexity.
+\todo{Lets not start this paper with the exact same sentence as the last paper.} A goal of many mechanical engineering analyses is the prediction and description of material failure.  When processes such as fracture are modeled, the partial-differential equations of classical mechanics are ill-defined at the resulting discontinuities in displacement.  A peridynamic formulation of continuum mechanics casts material behavior in terms of integral functions of displacement (as opposed to gradients of displacement), so that discontinuities can evolve naturally and require no special treatment.  Various peridynamic material models capture the deformation behavior of 3-dimensional solid objects \cite{silling2007peridynamic, silling2005meshfree, gerstle2007peridynamic}, but would be very expensive to implement for a thin plate or beam, as the thru-thickness discretization requirement to properly capture resistance to bending would be prohibitively expensive in a computational setting for a long, slender structural object.  Other peridynamic models capture tension and compression in 1D bars \cite{silling2003deformation} and 2D membranes \cite{silling2005peridynamic}, but these features do not resist transverse displacement.  A recent paper by Taylor and Steigmann \cite{taylor2013two} reduces a bond based 3D plate to two dimensions with an integral through the plate's thickness.  This creates a model that can represent thin structures and includes a bending term, but is used to simulate tension loading.  The model is limited to the 3D bond-based Poisson ratio \(\nu=\sfrac{1}{4}\), though the same technique could be applied to a state-based model at the expense of complexity.
 A nonlocal plate model by Ansari et al. \cite{ansari2010nonlocal} applies Eringen elasticity to Mindlin plate theory, an approach which captures scale effects but imposes stricter continuity requirements.
 
 Instead of developing new equations of motion, previous work by the authors of this article took a different approach, developing a constitutive model that directly resists bending while maintaining the same conservation of momentum equation as the 3D model.  The resulting bending model was shown to reproduce Euler-Bernoulli beam bending based on either linear elasticity or Eringen elasticity.
@@ -103,7 +103,7 @@ The second section of this paper provides a brief introduction to peridynamics, 
 %
 rather than the classical \textit{partial-differential equation}.  Instead of the divergence of stress, we have the integral of a ``force'' functional $\mathbi{f}$ of the position vector $\mathbf{x}$ and the position vector $\mathbf{q}$ of a point within the body domain $\Omega$.  This force functional may depend on \(\mathbf{x}\), \(\mathbf{q}\), their deformed positions, the original and deformed positions of other points in \(\Omega\), history, etc.
 
-Constitutive modeling of a wide variety of materials is accomplished by choosing the appropriate form for the force function.  While the simplest force functions recreate a one-parameter linear elastic solid material \cite{silling2000reformulation}, other force functions can be used to model nonlinear elasticity, plasticity, damage, and other behaviors \cite{silling2005peridynamic, silling2007peridynamic, foster2010viscoplasticity}\todo{Cite several more papers here, including your forthcoming beam paper}.
+Constitutive modeling of a wide variety of materials is accomplished by choosing the appropriate form for the force function.  While the simplest force functions recreate a one-parameter linear elastic solid material \cite{silling2000reformulation}, other force functions can be used to model nonlinear elasticity, plasticity, damage, and other behaviors \cite{silling2005peridynamic, silling2007peridynamic, foster2010viscoplasticity, foster2011energy, jogrady2014a}\todo{Cite several more papers here.}.
 
 To describe force functionals that incorporate the behavior of a totality of points in the nearby material (not just $\mathbf{x}$ and $\mathbf{q}$), we must introduce the concept of a peridynamic \emph{state}.
 
@@ -127,21 +127,20 @@ The deformed image of the vector $(\mathbf{q-x})$ is defined as the \textit{defo
 \end{equation}
 %
 
-Just as stress and strain are work conjugate, so too are the force and deformation vector states for hyperelastic materials.  If the force state $\vstate{T}{}{}$ is always in the same direction as the deformation state $\vstate{Y}{}{}$, then the force exerted by a ``bond'' between points is in the same direction as the deformed bond, and the model is called \textit{ordinary}.  Models in which they are not in the same direction are called \textit{non-ordinary}.  Silling et al.\ discussed the possibility of such models in \cite{silling2010peridynamic}, but very little work has touched on their use.  Foster et al.\ \cite{foster2010viscoplasticity} and Warren et al.\ \cite{warren2009non} showed that correspondence models, which approximate a deformation gradient and use it to calculate bond forces based on classical constitutive models, result in non-ordinary state based constitutive models for finite deformations.
+Just as stress and strain are work conjugate, so too are the force and deformation vector-states for hyperelastic materials.  If the force state $\vstate{T}{}{}$ is always in the same direction as the deformation state $\vstate{Y}{}{}$, then the force exerted by a ``bond'' between points is in the same direction as the deformed bond, and the model is called \textit{ordinary}.  Models in which they are not in the same direction are called \textit{non-ordinary}.  Silling et al.\ discussed the possibility of such models in \cite{silling2010peridynamic}, but very little work has touched on their use.  Foster et al.\ \cite{foster2010viscoplasticity} and Warren et al.\ \cite{warren2009non} showed that correspondence models, which approximate a deformation gradient and use it to calculate bond forces based on classical constitutive models, result in non-ordinary state based constitutive models for finite deformations.
 %
 %\FloatBarrier
 \section{Model Development}
-Consider the material model illustrated in \cref{fig:SimpleBondpair} in which every bond vector emanating from a point is connected by a rotational spring to its opposite emanating from that same point.
-These points and bonds are illustrated in the context of a plate in \cref{fig:BondPairPlate}.
+Consider the material model illustrated in \cref{fig:SimpleBondpair} in which every bond vector emanating from a point is connected by a rotational spring to its opposite emanating from that same point.  These points and bonds are illustrated in the context of a plate in \cref{fig:BondPairPlate}.
 %
-\begin{figure}[h]
+\begin{figure}[tbp]
     \centering
     \subinputfrom{\diagrampath/}{simpleBondPair.eps_tex}
-    \caption{Illustration of a bond pair model that resists angular deformation}
+    \caption{Illustration of a bond pair model that resists angular deformation.}
     \label{fig:SimpleBondpair}
 \end{figure}
 %
-If we call the deformed angle between these bonds \(\theta\), and choose the potential energy of that spring to be \(w(\boldsymbol{\xi}) = \omega(\boldsymbol{\xi})\alpha [1 + \cos(\theta) ] \) for the bond pair $\boldsymbol{\xi}$ and $-\boldsymbol{\xi}$, we can recover the non-ordinary force state proposed by Silling in \cite{silling2007peridynamic} by taking the Fr\'echet derivative. For the derivation and a description of the Fr\'echet derivative see \ref{sec:frechet}.
+If we call the deformed angle between these bonds \(\theta\), and choose the potential energy of that spring to be \todo{Need to define $\boldsymbol{\xi}$ somewhere} \(w(\boldsymbol{\xi}) = \omega(\boldsymbol{\xi})\alpha [1 + \cos(\theta) ] \) for the bond pair $\boldsymbol{\xi}$ and $-\boldsymbol{\xi}$, we can recover the non-ordinary force state proposed by Silling in \cite{silling2007peridynamic} and analyzed in \cite{jogrady2014a} by taking the Fr\'echet derivative. For the derivation and a description of the Fr\'echet derivative see \ref{sec:frechet}.
 %
 \begin{align}
 \label{eq:SillingForceNO}
@@ -150,41 +149,35 @@ If we call the deformed angle between these bonds \(\theta\), and choose the pot
 &=\omega(\boldsymbol{\xi})\frac{-\alpha}{|\vstate{Y}{}{\boldsymbol{\xi}}|} \frac{\vstate{Y}{}{\boldsymbol{\xi}}}{|\vstate{Y}{}{\boldsymbol{\xi}}|} \times \left[\frac{\vstate{Y}{}{\boldsymbol{\xi}}}{|\vstate{Y}{}{\boldsymbol{\xi}}|} \times \frac{\vstate{Y}{}{-\boldsymbol{\xi}}}{|\vstate{Y}{}{-\boldsymbol{\xi}}|}\right]
 \end{align}
 %
-Though it looks complex, \cref{eq:SillingForceNO} indicates a bond force perpendicular to the deformed bond and in the plane containing both the deformed bond and its partner as illustrated in \cref{fig:Bondpair}. 
-The moment that resists the change in angle between partner bonds is proportional to the sine of the angle between them, therefore the force magnitude is proportional to the sine of the angle between the bonds divided by the length of the deformed bond. 
+Though it looks complex, \cref{eq:SillingForceNO} indicates a bond force perpendicular to the deformed bond and in the plane containing both the deformed bond and its partner as illustrated in \cref{fig:Bondpair}.  The moment that resists the change in angle between partner bonds is proportional to the sine of the angle between them, therefore the force magnitude is proportional to the sine of the angle between the bonds divided by the length of the deformed bond. 
 %
-\begin{figure}[h]
+\begin{figure}[tbp]
     \centering
     \subinputfrom{\diagrampath/}{continuousPlate.eps_tex}
-    \caption{Illustration of a bond pair on a plate}
+    \caption{Illustration of a bond pair on a plate.}
     \label{fig:BondPairPlate}
 \end{figure}
 %
 %
-\begin{figure}[h]
+\begin{figure}[tbp]
     \centering
     \subinputfrom{\diagrampath/}{bondPairV.eps_tex}
     \caption{Deformation and force vector states}
     \label{fig:Bondpair}
 \end{figure}
 %
-This response is consistent with the idea of a rotational spring between bonds as long as the change in angle is small. 
-Because the potential energy and force states are functions of \textit{pairs} of peridynamic bonds, we will call this formulation a \textit{bond-pair model}. 
-Other choices for the bond-pair potential function, such as \( w = (\pi - \theta)^2 \), are also possible, but result in more mathematically complex analysis.
+This response is consistent with the idea of a rotational spring between bonds as long as the change in angle is small.  Because the potential energy and force-states are functions of \textit{pairs} of peridynamic bonds, we will call this formulation a \textit{bond-pair model}.  Other choices for the bond-pair potential function, such as \( w = (\pi - \theta)^2 \), are also possible, but result in more mathematically complex analysis.
+
 \subsection{Energy Equivalence}
 %
-To determine an appropriate choice of $\alpha$, we desire our peridynamic model to have an equivalent strain energy density to a classical Kirckhoff plate in the \emph{local limit}, i.e. when the nonlocal length scale vanishes.  
-We will begin with the assumptions from Kirckhoff plate theory: straight lines normal to the mid-surface remain both straight and normal to the deformed mid-surface, and plate thickness that does not change with deformation. 
-While we will start with the original assumptions from Kirchoff-Love plate theory of small displacements and rotations, they will not constrain the validity of the model for larger displacements and rotations. 
-For small vertical displacements we have
+To determine an appropriate choice of $\alpha$, we desire our peridynamic model to have an equivalent strain energy density to a classical Kirckhoff plate in the \emph{local limit}, i.e. when the nonlocal length scale vanishes.  We will begin with the assumptions from Kirckhoff plate theory: straight lines normal to the mid-surface remain both straight and normal to the deformed mid-surface, and the plate thickness does not change with deformation.  While we will start with the original assumptions from Kirchoff-Love plate theory of small displacements and rotations, they will not constrain the validity of the model for larger displacements and rotations.  For small vertical displacements we have
 %
 \begin{equation}
     \theta(\vstate{Y}{}{\boldsymbol{\xi}},\vstate{Y}{}{\boldsymbol{-\xi}}) \approx \pi-\frac{z(\mathbf{x}+\boldsymbol{\xi})-2z(\mathbf{x})+z(\mathbf{x}-\boldsymbol{\xi})}{|\boldsymbol{\xi}|},
     \label{eq:beamdtheta}
 \end{equation}
 %
-where $z$ is the vertical displacement of material point.  
-Taking \(\boldsymbol{\xi}=\xi (\cos(\phi),\sin(\phi))\) in cartesian coordinates and momentarily assuming continuous displacements for the sake of comparison, we use a Taylor series to expand the right-hand-side of eq.~(\ref{eq:beamdtheta}) about \(\xi = 0\) 
+where $z$ is the vertical displacement of material point.  Taking \(\boldsymbol{\xi}=\xi (\cos(\phi),\sin(\phi))\) in cartesian coordinates and momentarily assuming continuous displacements for the sake of comparison, we use a Taylor series to expand the right-hand-side of eq.~(\ref{eq:beamdtheta}) about \(\xi = 0\) 
 %
 \begin{equation}
     \theta(\vstate{Y}{}{\boldsymbol{\xi}},\vstate{Y}{}{\boldsymbol{-\xi}}) \approx \pi-\frac{\xi}{2} \left(\cos^2(\phi) \kappa_1+\sin^2(\phi) \kappa_2+2\sin(\phi)\cos(\phi)\kappa_3\right)+\mathcal{O}(\xi^3)
@@ -212,6 +205,7 @@ If we use a weighting function \(\omega(\boldsymbol{\xi})=\omega(\xi)\) and assu
     W =& \alpha \int_{0}^\delta\int_0^{2 \pi} w\; \xi {\rm d}\phi {\rm d}\xi ,\notag \\
     =& \alpha \frac{3\pi}{8} \left(\kappa_1^2+\kappa_2^2+\frac{2}{3}\kappa_1\kappa_1+\frac{4}{3}\kappa_3^2 \right)\int_{0}^\delta \omega(\xi)\xi^3{\rm d}\xi + \mathcal{O}(\delta^6).\notag 
 \end{align}
+\todo{It's a little unclear how $m$ arrises below from this equation.  Please see if you can make it more clear.} 
 %
 Equating $W$ with the classical Kirchoff plate strain-energy density, $\Omega$, and taking the limit as $\delta \to 0$ we can solve for $\alpha$
 %
@@ -229,22 +223,17 @@ with
     m = \int_{0}^{\delta} \int_{0}^{2\pi}\omega(\xi) \xi^2 \xi {\rm d}\phi {\rm d}\xi \notag.
 \end{equation}
 
-It must be noted that the restriction \(\nu=\sfrac{1}{3}\) is the same imposed by the use of a bond based peridynamic model for in-plane deformation of a 2D peridynamic plate.
+It should be noted that the restriction \(\nu=\sfrac{1}{3}\) is the same imposed by the use of a bond based peridynamic model for in-plane deformation of a 2D peridynamic plate.
 
 \subsection{Combining Bending and Extension Models}
-The bond-pair bending model does not resist deformations that preserve the angles between opposite bonds, such as in-plane stretch or shear.
-If these behaviors are expected in combination with bending, a useful model must resist both.
-To create a plate model that also resists these deformations, we combine the bond-pair model with a two-dimensional version of the original bond-based linearly-elastic peridynamic solid model from \cite{silling2000reformulation}.
-In this model, individual bonds act as springs resisting changes in length.
+The bond-pair bending model does not resist deformations that preserve the angles between opposite bonds\todo{This reads a little funny, could we not say: \ldots resist in-plane stretching or shear deformation.}, such as in-plane stretch or shear \todo{or you might just say: \dots does not develop membrane forces.}.  If these behaviors are expected in combination with bending, a useful model must resist both.  To create a plate model that also resists these deformations, i.e.\ a flat shell, we combine the bond-pair model with a two-dimensional version of the original bond-based linearly-elastic peridynamic solid model from \cite{silling2000reformulation}.  In this model, individual bonds act as springs resisting changes in length.
 %
 \begin{equation}
     \label{eq:bondextension}
     \vstate{T}{}{\boldsymbol{\xi}} =\beta\left(|\vstate{Y}{}{\boldsymbol{\xi}}|-|\boldsymbol{\xi}|\right)\frac{\vstate{Y}{}{\boldsymbol{\xi}}}{|\vstate{Y}{}{\boldsymbol{\xi}}|}
 \end{equation}
 %
-By matching the energy of a plate in shear deformation, we can relate \(\beta\) to the shear modulus and thickness of the plate.
-Following the example of \cite{silling2007peridynamic}, we begin with a plate under pure in-plane shear.
-In Einstein notation, the strain energy of this plate is
+By matching the energy of a plate in shear deformation, we can relate \(\beta\) to the shear modulus and thickness of the plate.  Following the example of \cite{silling2007peridynamic}, we begin with a plate \todo{should this be shell?} under pure in-plane shear.  In Einstein notation, the strain energy of this plate is
 %
 %\begin{align*}
 %    W^d_\text{C} &= G \; h \; \epsilon_{ij} \epsilon_{ij} = G \; h \; \epsilon_{ij}^d \epsilon_{ij}^d \\
@@ -253,10 +242,10 @@ In Einstein notation, the strain energy of this plate is
 %\end{align*}
 %
 \begin{align*}
-    W_\text{C} &= G \; h \; \epsilon_{ij}^d \epsilon_{ij}^d \\
-    W_\text{PD} &= \frac{\beta}{2}\int_A \omega(\xi)\left(|\vstate{Y}{}{\boldsymbol{\xi}}|-|\boldsymbol{\xi}|\right)^2 \; dA_{\boldsymbol{\xi}} \\
-    &=\frac{\beta}{2}\int_A  \omega(\xi) \frac{\epsilon_{ij}\xi_i \xi_j }{|\boldsymbol{\xi}|} \frac{\epsilon_{kl} \xi_k \xi_l }{|\boldsymbol{\xi}|}\;dA_{\boldsymbol{\xi}}\\
-    &=\frac{\beta}{2} \epsilon_{ij}^d \epsilon_{kl}^d \int_A \frac{ \omega(\xi)}{|\boldsymbol{\xi}|^2}\xi_i \xi_j \xi_k \xi_l \;dA_{\boldsymbol{\xi}}\\
+    W_\text{C} &= G \; h \; \epsilon_{ij}^d \epsilon_{ij}^d,  \\  \\
+    W_\text{PD} &= \frac{\beta}{2}\int_A \omega(\xi)\left(|\vstate{Y}{}{\boldsymbol{\xi}}|-|\boldsymbol{\xi}|\right)^2 \; {\rm d}A_{\boldsymbol{\xi}}, \\
+    &=\frac{\beta}{2}\int_A  \omega(\xi) \frac{\epsilon_{ij}\xi_i \xi_j }{|\boldsymbol{\xi}|} \frac{\epsilon_{kl} \xi_k \xi_l }{|\boldsymbol{\xi}|}\;{\rm d}A_{\boldsymbol{\xi}},\\
+    &=\frac{\beta}{2} \epsilon_{ij}^d \epsilon_{kl}^d \int_A \frac{ \omega(\xi)}{|\boldsymbol{\xi}|^2}\xi_i \xi_j \xi_k \xi_l \;{\rm d}A_{\boldsymbol{\xi}}.
 \end{align*}
 %
 With $i, j, k, l = 1,2$. For a circular $\omega$, combinations of $\{i,j,k,l\}$ with an odd number of any index, such as $\{1,1,1,2\}$ will integrate to 0.
@@ -270,26 +259,21 @@ With $i, j, k, l = 1,2$. For a circular $\omega$, combinations of $\{i,j,k,l\}$ 
      \beta &= \frac{8 \; G\;h}{m}
 \end{align*}
 %
+Having calibrated the bond-extension model to the shear modulus, applying a different uniform strain (such as might result from uniaxial tension) reveals the bond-based model to result in a one-parameter linearly-elastic model with Poisson's ratio \(\nu=\sfrac{1}{3}\).  
 
-Having calibrated the bond-extension model to the shear modulus, applying a different uniform strain (such as might result from uniaxial tension) reveals the bond-based model to result in a one-parameter linearly-elastic model with Poisson's ratio \(\nu=\sfrac{1}{3}\).
-
-Combining the bending and extension models allows for the description of more complex behaviors, particularly the stiffening effect of in-plane tension on the transverse bending of a plate.
-Consider a single bond-pair in the combined model:
-\begin{figure}
+Combining the bending and extension models allows for the description of more complex behaviors, particularly the stiffening effect of in-plane tension on the transverse bending of a plate.  Consider a single bond-pair in the combined model: 
+%
+\begin{figure}[tbp]
   \label{fig:hybridmodel}
   \centering
   \input{\diagrampath/bondPairCombinedV.tex}
   \caption{The Hybrid Model Combines Bending and Extension Components}
 \end{figure}
-As the two sides are pulled apart, the magnitude of the extension force in each bond increases, and the magnitude of the bending force decreases. 
-At the same time, the angle at which the extension force acts decreases, and the angle of action for the bending force increases.
-For small amounts of bending and reasonable stretches, increased tension in the direction of the bond pair results in increase restorative force.
+%
+As the two sides are pulled apart, the magnitude of the extension force in each bond increases, and the magnitude of the bending force decreases.  At the same time, the angle at which the extension force acts decreases, and the angle of action for the bending force increases.  For small amounts of bending and reasonable stretches, increased tension in the direction of the bond pair results in increase restorative force.
 
-\section{Extension to Arbitrary Poisson Ratio}
-Although many materials have Poisson ratios of \(\nu\approx \sfrac{1}{3}\), it is nonetheless desirable to extend the model to materials with arbitrary Poisson ratios.
-For isotropic, linearly elastic models of solid materials, Silling et. al. extended the peridynamic material model to arbitrary material parameters in \cite{silling2007peridynamic} by decomposing the deformation state into isotropic and deviatoric deformation states.
-In the absence of plastic deformation, we need only find the difference between the strain energy of a deformed bond-based plate and the strain energy of an elastic plate with Poisson's ratio \(\nu \neq \sfrac{1}{3}\).
-The difference is a function of the isotropic strain in two dimensions, \(\theta_2\)
+\section{Extension to arbitrary Poisson ratio}
+Although many materials have Poisson ratios of \(\nu\approx \sfrac{1}{3}\), it is nonetheless desirable to extend the model to materials with arbitrary Poisson ratios.  For isotropic, linearly elastic models of solid materials, Silling et al.\ extended the peridynamic material model to arbitrary material parameters in \cite{silling2007peridynamic} by decomposing the deformation into isotropic and deviatoric components.  In the absence of plastic deformation, we need only find the difference between the strain energy of a deformed bond-based plate and the strain energy of an elastic plate with Poisson's ratio \(\nu \neq \sfrac{1}{3}\).  The difference is a function of the isotropic strain in two dimensions, \(\theta_2\)
 %
 \begin{align}
     W' &= \frac{G\;h}{2}\left(\frac{3\nu-1}{1-\nu}\right)\theta_2^2 \notag \\
@@ -301,8 +285,7 @@ The difference is a function of the isotropic strain in two dimensions, \(\theta
 %
 This is to be expected because the bond-based model was calibrated to the shear strain energy, leaving discrepancies proportional to the isotropic strain energy that fall to 0 as Poisson's ratio approaches \(\nu = \sfrac{1}{3}\).
 
-This decomposition method inspires a similar approach to the bending model
-To perform the same extension for the plate model in bending, we find the error in the 1-parameter strain energy for \(\nu \neq \sfrac{1}{3}\)
+This decomposition method inspires a similar approach to our plate model. To perform the same extension for the plate model in bending, we find the error in the 1-parameter strain energy for \(\nu \neq \sfrac{1}{3}\)
 %
 \begin{align}
     W'=&\frac{G h^3}{12(1-\nu)} \left(\kappa_1^2+\kappa_2^2+2\nu\kappa_1\kappa_2+2(1-\nu)\kappa_3^2 \right)\notag\\
@@ -310,10 +293,7 @@ To perform the same extension for the plate model in bending, we find the error 
     W'=&2G \frac{h^3}{12}\frac{3\nu-1}{1-\nu} \left(\frac{\kappa_1+\kappa_2}{2}\right)^2.\notag
 \end{align}
 %
-The discrepancy in energy is proportional to the square of average curvature, \(\frac{\kappa_1+\kappa_2}{2} = \bar{\kappa}\), which we will also refer to as the isotropic curvature.
-The isotropic curvature can be envisioned as the portion of the deformation that resembles a spherical bowl.
-A complete decomposition of bending energy into isotropic and deviatoric components as performed by Fischer in \cite{fischer1992bending} produces a far more complex model and is unnecessary at this time.
-For a single bond pair we can represent the curvature vector along the bond pair as 
+The discrepancy in energy is proportional to the square of average curvature, \(\frac{\kappa_1+\kappa_2}{2} = \bar{\kappa}\), which we will also refer to as the isotropic curvature.  The isotropic curvature can be envisioned as the portion of the deformation that resembles a spherical bowl.  A complete decomposition of bending energy into isotropic and deviatoric components as performed by Fischer in \cite{fischer1992bending} produces a far more complex model and is unnecessary at this time.  For a single bond pair we can represent the curvature vector along the bond pair as 
 %\marginpar{ maybe leave this out and go straight to the curvature vector?}
 %
 \begin{equation}
@@ -414,7 +394,7 @@ As expected from an energy-equivalent model, the slice along the plate's centerl
 Accurate results require a denser discretization than is the case for the elastic beams from previous work.
 
 %
-\begin{figure}[h]
+\begin{figure}[tbp]
   \centering
   \resizebox{0.55\linewidth}{!}{\input{\plotpath/elasticPlate_convergence_n.pgf}}
   \caption{The Bond-Pair Model Converges on Accurate Plate Deflection}
@@ -426,7 +406,7 @@ An analytical solution for this combination of uniform transverse pressure and i
 As is mechanically intuitive, increasing in-plane tension results in decreasing transverse displacement, while the opposite is true for compressive edge loading.
 Normalized to the the maximum displacement of a transversely-loaded plate with no in-plane edge loads, the results in \cref{fig:plateStiffening} show that the hybrid model does a good job of simulating the impact of in-plane tension on maximum transverse deflection.
 
-\begin{figure}[h]
+\begin{figure}[tbp]
   \centering
   \resizebox{0.55\linewidth}{!}{\input{\plotpath/plateStiffening.pgf}}
   \caption{The Combined Model Accurately Captures the Influence of In-Plane Tension}
@@ -435,7 +415,7 @@ Normalized to the the maximum displacement of a transversely-loaded plate with n
 
 The bond-multiple plate model is motivated by the desire to extend the bending model to an arbitrary Poisson's ratio, so the obvious test for this model is the same as for the bond-pair model. When compared to analytical predictions, \cref{fig:plate_poisson} demonstrates the bond-multiple model's ability to simulate plates with Poisson's ratios that depart significantly from the bond-pair limitation of $\nu = \sfrac{1}{3}$.
 
-\begin{figure}[h]
+\begin{figure}[tbp]
   \centering
   \resizebox{0.55\linewidth}{!}{\input{\plotpath/elasticPlatePoissonEffect.pgf}}
   \caption{The Extended Model Matches for Arbitrary Poisson's Ratio}
