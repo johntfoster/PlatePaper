@@ -83,7 +83,7 @@ peridynamics \sep non-ordinary model \sep non-local model
 
 \section{Introduction}
 <<<<<<< HEAD
-\todo{Lets not start this paper with the exact same sentence as the last paper.} A goal of many mechanical engineering analyses is the prediction and description of material failure.  When processes such as fracture are modeled, the partial-differential equations of classical mechanics are ill-defined at the resulting discontinuities in displacement.  A peridynamic formulation of continuum mechanics casts material behavior in terms of integral functions of displacement (as opposed to gradients of displacement), so that discontinuities can evolve naturally and require no special treatment.  Various peridynamic material models capture the deformation behavior of 3-dimensional solid objects \cite{silling2007peridynamic, silling2005meshfree, gerstle2007peridynamic}, but would be very expensive to implement for a thin plate or beam, as the thru-thickness discretization requirement to properly capture resistance to bending would be prohibitively expensive in a computational setting for a long, slender structural object.  Other peridynamic models capture tension and compression in 1D bars \cite{silling2003deformation} and 2D membranes \cite{silling2005peridynamic}, but these features do not resist transverse displacement.  A recent paper by Taylor and Steigmann \cite{taylor2013two} reduces a bond based 3D plate to two dimensions with an integral through the plate's thickness.  This creates a model that can represent thin structures and includes a bending term, but is used to simulate tension loading.  The model is limited to the 3D bond-based Poisson ratio \(\nu=\sfrac{1}{4}\), though the same technique could be applied to a state-based model at the expense of complexity.
+Modeling material failure is one of the most common challenges in mechanical engineering analysis. When processes such as fracture are modeled, the partial-differential equations of classical mechanics are ill-defined at the resulting discontinuities in displacement.  A peridynamic formulation of continuum mechanics casts material behavior in terms of integral functions of displacement (as opposed to gradients of displacement), so that discontinuities can evolve naturally and require no special treatment.  Various peridynamic material models capture the deformation behavior of 3-dimensional solid objects \cite{silling2007peridynamic, silling2005meshfree, gerstle2007peridynamic}, but would be very expensive to implement for a thin plate or beam, as the thru-thickness discretization requirement to properly capture resistance to bending would be prohibitively expensive in a computational setting for a long, slender structural object.  Other peridynamic models capture tension and compression in 1D bars \cite{silling2003deformation} and 2D membranes \cite{silling2005peridynamic}, but these features do not resist transverse displacement.  A recent paper by Taylor and Steigmann \cite{taylor2013two} reduces a bond based 3D plate to two dimensions with an integral through the plate's thickness.  This creates a model that can represent thin structures and includes a bending term, but is used to simulate tension loading.  The model is limited to the 3D bond-based Poisson ratio \(\nu=\sfrac{1}{4}\), though the same technique could be applied to a state-based model at the expense of complexity.
 A nonlocal plate model by Ansari et al. \cite{ansari2010nonlocal} applies Eringen elasticity to Mindlin plate theory, an approach which captures scale effects but imposes stricter continuity requirements.
 =======
 %\todo{Lets not start this paper with the exact same paragraph as the last paper.} A goal of many mechanical engineering analyses is the prediction and description of material failure.  When processes such as fracture are modeled, the partial-differential equations of classical mechanics are ill-defined at the resulting discontinuities in displacement.  A peridynamic formulation of continuum mechanics casts material behavior in terms of integral functions of displacement (as opposed to gradients of displacement), so that discontinuities can evolve naturally and require no special treatment.  Various peridynamic material models capture the deformation behavior of 3-dimensional solid objects \cite{silling2007peridynamic, silling2005meshfree, gerstle2007peridynamic}, but would be very expensive to implement for a thin plate or beam, as the thru-thickness discretization requirement to properly capture resistance to bending would be prohibitively expensive in a computational setting for a long, slender structural object.  Other peridynamic models capture tension and compression in 1D bars\cite{silling2003deformation} and 2D membranes\cite{silling2005peridynamic}, but these features do not resist transverse displacement.  A recent paper by Taylor and Steigmann \cite{taylor2013two} reduces a bond based 3D plate to two dimensions with an integral through the plate's thickness.  This creates a model that can represent thin structures and includes a bending term, but is used to simulate tension loading.  The model is limited to the 3D bond-based Poisson ratio \(\nu=\sfrac{1}{4}\), though the same technique could be applied to a state-based model at the expense of complexity.
@@ -137,7 +137,7 @@ Just as stress and strain are work conjugate, so too are the force and deformati
 %
 %\FloatBarrier
 \section{Model Development}
-Consider the material model illustrated in \cref{fig:SimpleBondpair} in which every bond vector emanating from a point is connected by a rotational spring to its opposite emanating from that same point.  These points and bonds are illustrated in the context of a plate in \cref{fig:BondPairPlate}.
+Consider the material model illustrated in \cref{fig:SimpleBondpair} in which every bond vector $\boldsymbol{\xi} = \mathbf{q}-\mathbf{x}\: $ emanating from a point is connected by a rotational spring to its opposite emanating from that same point.  These points and bonds are illustrated in the context of a plate in \cref{fig:BondPairPlate}.
 %
 \begin{figure}[tbp]
     \centering
@@ -146,7 +146,7 @@ Consider the material model illustrated in \cref{fig:SimpleBondpair} in which ev
     \label{fig:SimpleBondpair}
 \end{figure}
 %
-If we call the deformed angle between these bonds \(\theta\), and choose the potential energy of that spring to be \todo{Need to define $\boldsymbol{\xi}$ somewhere} \(w(\boldsymbol{\xi}) = \omega(\boldsymbol{\xi})\alpha [1 + \cos(\theta) ] \) for the bond pair $\boldsymbol{\xi}$ and $-\boldsymbol{\xi}$, we can recover the non-ordinary force state proposed by Silling in \cite{silling2007peridynamic} and analyzed in \cite{jogrady2014a} by taking the Fr\'echet derivative. For the derivation and a description of the Fr\'echet derivative see \ref{sec:frechet}.
+If we call the deformed angle between these bonds \(\theta\), and choose the potential energy of that spring to be \(w(\boldsymbol{\xi}) = \omega(\boldsymbol{\xi})\alpha [1 + \cos(\theta) ] \) for the bond pair $\boldsymbol{\xi}$ and $-\boldsymbol{\xi}$, we can recover the non-ordinary force state proposed by Silling in \cite{silling2007peridynamic} and analyzed in \cite{jogrady2014a} by taking the Fr\'echet derivative. For the derivation and a description of the Fr\'echet derivative see \ref{sec:frechet}.
 %
 \begin{align}
 \label{eq:SillingForceNO}
@@ -219,27 +219,24 @@ Equating $W$ with the classical Kirchoff plate strain-energy density, $\Omega$, 
     \lim_{\delta \to 0}  W &= \Omega, \notag \\
     \alpha \frac{3 \pi}{8} m \left(\kappa_1^2+\kappa_2^2+\frac{2}{3}\kappa_1\kappa_1+\frac{4}{3}\kappa_3^2 \right)&= \left[ \frac{G h^3}{12(1-\nu)} \left(\kappa_1^2+\kappa_2^2+2\nu\kappa_1\kappa_1+2(1-\nu)\kappa_3^2 \right) \right]_{\nu=1/3}, \notag \\
 %    \nu = \frac{1}{3},\:\: \alpha &= \frac{8}{3 \pi m} \frac{G h^3}{12(1-\nu)},
-    \alpha &= \frac{2 G h^3}{3 m}, 
-\label{eq:alpha}
+    \alpha &= \frac{2 G h^3}{3 m}, \\
+    \text{with}\qquad \qquad \notag \\
+    \label{eq:alpha}
+%    m = \int_{0}^{\delta} \omega(\xi) \xi^3 {\rm d}\xi \notag.
+    m &= \int_{0}^{\delta} \int_{0}^{2\pi}\omega(\xi) \xi^2 \xi {\rm d}\phi {\rm d}\xi \notag,
 \end{align}
 %
-with 
-\begin{equation}
-%    m = \int_{0}^{\delta} \omega(\xi) \xi^3 {\rm d}\xi \notag.
-    m = \int_{0}^{\delta} \int_{0}^{2\pi}\omega(\xi) \xi^2 \xi {\rm d}\phi {\rm d}\xi \notag.
-\end{equation}
-%
-where, $G$ is the shear modulus, $h$ is the thickness of the plate, and we have evaluated the classical Kirchoff strain-energy at a Poisson ratio of \(\sfrac{1}{3}\) in order to solve for alpha as a constant.  It should be noted that the restriction \(\nu=\sfrac{1}{3}\) is the same imposed by the use of a bond based peridynamic model for in-plane deformation of a 2D peridynamic plate. We will show an extension to this model that removes this restriction in Section~\ref{sec:arbitrary}.
+where $G$ is the shear modulus, $h$ is the thickness of the plate, and we have evaluated the classical Kirchoff strain-energy at a Poisson ratio of \(\sfrac{1}{3}\) in order to solve for alpha as a constant.  Because $\alpha$ is inversely proportional to $m$, the energy does not change with varying choices for $\omega$ and $\delta$. It should be noted that the restriction \(\nu=\sfrac{1}{3}\) is the same imposed by the use of a bond based peridynamic model for in-plane deformation of a 2D peridynamic plate. We will show an extension to this model that removes this restriction in Section~\ref{sec:arbitrary}.
 
 \subsection{Combining Bending and Extension Models}
-The bond-pair bending model does not resist deformations that preserve the angles between opposite bonds\todo{This reads a little funny, could we not say: \ldots resist in-plane stretching or shear deformation.}, such as in-plane stretch or shear \todo{or you might just say: \dots does not develop membrane forces.}.  If these behaviors are expected in combination with bending, a useful model must resist both.  To create a plate model that also resists these deformations, i.e.\ a flat shell, we combine the bond-pair model with a two-dimensional version of the original bond-based linearly-elastic peridynamic solid model from \cite{silling2000reformulation}.  In this model, individual bonds act as springs resisting changes in length.
+The bond-pair bending model does not resist in-plane stretching or shear deformation because these deformations preserve the angles between opposite bonds. \todo{This reads a little funny, could we not say: \ldots resist in-plane stretching or shear deformation.}\todo{or you might just say: \dots does not develop membrane forces.}  If these behaviors are expected in combination with bending, a useful model must resist both.  To create a plate model that also resists these deformations, i.e.\ a flat shell, we combine the bond-pair model with a two-dimensional version of the original bond-based linearly-elastic peridynamic solid model from \cite{silling2000reformulation}.  In this model, individual bonds act as springs resisting changes in length.
 %
 \begin{equation}
     \label{eq:bondextension}
     \vstate{T}{}{\boldsymbol{\xi}} =\beta\left(|\vstate{Y}{}{\boldsymbol{\xi}}|-|\boldsymbol{\xi}|\right)\frac{\vstate{Y}{}{\boldsymbol{\xi}}}{|\vstate{Y}{}{\boldsymbol{\xi}}|}
 \end{equation}
 %
-By matching the energy of a plate in shear deformation, we can relate \(\beta\) to the shear modulus and thickness of the plate.  Following the example of \cite{silling2007peridynamic}, we begin with a plate \todo{should this be shell?} under pure in-plane shear.  In Einstein notation, the strain energy of this plate is
+By matching the energy of a 2D material in shear deformation, we can relate \(\beta\) to the shear modulus and thickness of the shell.  Following the example of \cite{silling2007peridynamic}, we begin with a 2D material under pure in-plane shear.  In Einstein notation, the strain energy of this material is
 %
 %\begin{align*}
 %    W^d_\text{C} &= G \; h \; \epsilon_{ij} \epsilon_{ij} = G \; h \; \epsilon_{ij}^d \epsilon_{ij}^d \\
@@ -267,7 +264,7 @@ where $\epsilon^d$ is the deviatoric strain tensor.  Now, to evaluate the integr
 %
 Having calibrated the bond-extension model to the shear modulus, applying a different uniform strain (such as might result from uniaxial tension) reveals the bond-based model to result in a one-parameter linearly-elastic model with Poisson's ratio \(\nu=\sfrac{1}{3}\).  
 
-Combining the bending and extension models allows for the description of more complex behaviors, particularly the stiffening effect of in-plane tension on the transverse bending of a plate.  Consider a single bond-pair in the combined model shown in Fig.~\ref{fig:hybridmodel}.
+Combining the bending and extension models allows for the description of more complex behaviors, particularly the stiffening effect of in-plane tension on the transverse bending of a shell.  Consider a single bond-pair in the combined model shown in Fig.~\ref{fig:hybridmodel}.
 %
 \begin{figure}[tbp]
   \centering
@@ -315,26 +312,26 @@ For large rotations, we can define an average curvature vector \(\bar{\boldsymbo
 This leads us to model the average curvature as 
 %
 \begin{align}
-    \bar{\boldsymbol{\kappa}} &= \frac{1}{m_2} \int_0^\delta \int_0^{2\pi}\psi(\xi)\frac{\vstate{Y}{}{\boldsymbol{\xi}}+\vstate{Y}{}{\boldsymbol{-\xi}}}{\xi^2} \xi {\rm d}\phi {\rm d}\xi ;\notag \\
-    m_2 &= \int_0^\delta \int_0^{2\pi}\psi(\xi)\xi {\rm d}\phi {\rm d}\xi. \notag
+    \bar{\boldsymbol{\kappa}} &= \frac{1}{m} \int_0^\delta \int_0^{2\pi}\omega(\xi)\frac{\vstate{Y}{}{\boldsymbol{\xi}}+\vstate{Y}{}{\boldsymbol{-\xi}}}{\xi^2} \xi {\rm d}\phi {\rm d}\xi ;\notag \\
+    m &= \int_0^\delta \int_0^{2\pi}\omega(\xi)\xi {\rm d}\phi {\rm d}\xi. \notag
 \end{align}
 %
-\todo{I say, to avoid the question of ``How to you select $\psi$'', let's leave it equal to $\omega$ at this point.  Then $m$ is also identical.} The weighting function \(\psi(\xi)\) performs a role similar to that of \(\omega(\xi)\) from the previous section, but need not be identical.
+The weighting function \(\omega(\xi)\) performs the same function as in the previous section.
 We can rewrite the energy discrepancy in terms of \(\bar{\boldsymbol{\kappa}}\).
 %
 \begin{equation}
-    W'=2G\frac{h^3}{12}\frac{3\nu-1}{1-\nu}\frac{\bar{\boldsymbol{\kappa}}^2}{2}. \notag
+    W'=2G\frac{h^3}{12}\frac{3\nu-1}{1-\nu}\bar{\boldsymbol{\kappa}}^2. \notag
 \end{equation}
 %
-We can take the Fr\'{e}chet derivative \todo{Can you show the details in the Appendix?  Also, should the $dA$ be there?} to produce a correction force vector state
+We can take the Fr\'{e}chet derivative (details in \cref{sec:frechet})\todo{Can you show the details in the Appendix?  Also, should the $dA$ be there?} to produce a correction force vector state
 %
 \begin{equation}
-    \vstate{T'}{}{\boldsymbol{\xi}}=\frac{4G}{m_2}\frac{h^3}{12}\frac{3\nu-1}{1-\nu}\frac{\psi(\boldsymbol{\xi})}{\xi^2} \bar{\boldsymbol{\kappa}}\;dA,
+    \vstate{T'}{}{\boldsymbol{\xi}}=\frac{8G}{m}\frac{h^3}{12}\frac{3\nu-1}{1-\nu}\frac{\omega(\boldsymbol{\xi})}{\xi^2} \bar{\boldsymbol{\kappa}},
     \label{eq:pressureState}
 \end{equation}
 %
 that is not directly dependent on the deformation of a single bond pair.  Instead, \cref{eq:pressureState} represents a bond-length dependent ``pressure'' applied to every pair of bonds extending from a node.  This ``pressure'' is proportional to the curvature vector at that node.
-A weighting function \(\psi(\boldsymbol{\xi}) = |\boldsymbol{\xi}|\) can ensure that the integral expression for force at a point is convergent.  This extra term that is dependent on the bending of all the pairs around a material point means that the extension is not properly a \textit{bond-pair} model.  Instead, it would be more accurate to call it a \textit{bond-multiple} model, in which the bond forces and energies are functions of the relationship between a family of bonds.  In either the continuous or discrete cases, this model extension requires the additional step of evaluating the isotropic curvature at each point, but the increased complexity of the extended model captures in the local limit the behavior of a two-parameter elastic material plate.
+A weighting function \(\omega(\boldsymbol{\xi}) = |\boldsymbol{\xi}|\) can ensure that the integral expression for force at a point is convergent.  This extra term that is dependent on the bending of all the pairs around a material point means that the extension is not properly a \textit{bond-pair} model.  Instead, it would be more accurate to call it a \textit{bond-multiple} model, in which the bond forces and energies are functions of the relationship between a family of bonds.  In either the continuous or discrete cases, this model extension requires the additional step of evaluating the isotropic curvature at each point, but the increased complexity of the extended model captures in the local limit the behavior of a two-parameter elastic material plate.
 %
 \section{Numerical Simulation}
 \subsection{Discretized Model}
@@ -372,9 +369,9 @@ with
 Implementing the 2-parameter model requires finding the isotropic curvature at each point.
 %
 \begin{align*}
-    \bar{\boldsymbol{\kappa}}(\mathbf{x}) &= \frac{1}{m_2} \sum_i \psi(\boldsymbol{\xi}_i)\frac{\mathbf{p}_i +\mathbf{q}_i }{\boldsymbol{\xi}_i^2};\notag \\
-    m_2(\mathbf{x})  &= \sum_i \psi(\boldsymbol{\xi}_i); \notag \\
-    \alpha^\text{iso}(\mathbf{x}) &= \frac{4G}{m_2}\frac{h^3}{12}\frac{3\nu-1}{1-\nu}(\Delta x)^2;\\
+    \bar{\boldsymbol{\kappa}}(\mathbf{x}) &= \frac{1}{m} \sum_i \omega(\boldsymbol{\xi}_i)\frac{\mathbf{p}_i +\mathbf{q}_i }{\boldsymbol{\xi}_i^2};\notag \\
+    m(\mathbf{x})  &= \sum_i \omega(\boldsymbol{\xi}_i); \notag \\
+    \alpha^\text{iso}(\mathbf{x}) &= \frac{4G}{m}\frac{h^3}{12}\frac{3\nu-1}{1-\nu}(\Delta x)^2;\\
     f^\text{iso}(\mathbf{x}) &= \sum_j \left\{\left[\alpha^\text{iso}(\mathbf{x})\bar{\boldsymbol{\kappa}}(\mathbf{x})-\alpha^\text{iso}(\mathbf{x}+\boldsymbol{\xi}_j)\bar{\boldsymbol{\kappa}}(\mathbf{x}+\boldsymbol{\xi}_j) \right] \frac{\omega(\boldsymbol{\xi}_j)}{\boldsymbol{\xi}_j^2} \right\}
 \end{align*}
 %
@@ -412,7 +409,7 @@ Accurate results require a denser discretization than is the case for the elasti
   \label{fig:plate_convergence_n}
 \end{figure}
 
-The test case for the hybrid model is a similar simply-supported square plate with an additional in-plane tension load along two opposing sides.  An analytical solution for this combination of uniform transverse pressure and in-plane edge tension can be found in Timoshenko's book~\cite{timoshenko1959theory}.  As is mechanically intuitive, increasing in-plane tension results in decreasing transverse displacement, while the opposite is true for compressive edge loading.  Normalized to the the maximum displacement of a transversely-loaded plate with no in-plane edge loads, the results in \cref{fig:plateStiffening} show that the hybrid model does a good job of simulating the impact of in-plane tension on maximum transverse deflection.\todo{We already spoke about this.  I would either make it match perfectly or remove the first point, otherwise it just begs a question from a reviewer.}
+The test case for the hybrid model is a similar simply-supported square plate with an additional in-plane tension load along two opposing sides.  An analytical solution for this combination of uniform transverse pressure and in-plane edge tension can be found in Timoshenko's book~\cite{timoshenko1959theory}.  As is mechanically intuitive, increasing in-plane tension results in decreasing transverse displacement, while the opposite is true for compressive edge loading.  Normalized to the the maximum displacement of a transversely-loaded plate with no in-plane edge loads, the results in \cref{fig:plateStiffening} show that the hybrid model does a good job of simulating the impact of in-plane tension on maximum transverse deflection.
 %
 \begin{figure}[tbp]
   \centering
@@ -437,7 +434,7 @@ The non-ordinary bond-pair model is the first peridynamic material model to dire
 \appendix
 \section{Fr\'echet Derivative}
 \label{sec:frechet}
-
+\subsection{Definition}
 The derivative of a function of a state is defined by Silling in \cite{silling2007peridynamic} as follows:
 \begin{quote}
 Let $\Psi$ be a function of a state, $\Psi(\cdot):\mathcal{A}_m\rightarrow\mathcal{L}_n$. Suppose there exists a state-valued function denoted $\nabla\Psi\in\mathcal{A}_{m+n}$ such that for any $\vstate{A}{}{}\in\mathcal{A}_m$ and any $\Delta\vstate{A}{}{}\in\mathcal{A}_m$,
@@ -446,7 +443,9 @@ Let $\Psi$ be a function of a state, $\Psi(\cdot):\mathcal{A}_m\rightarrow\mathc
 \end{equation}
 Then $\Psi$ is said to be \textit{differentiable} and $\nabla\Psi$ is called the \textit{Frechet derivative} of $\Psi$.
 \end{quote}
-This is a fairly straightforward way of defining a derivative with respect to a state, and we will apply it to derive the bond force function from the bond-pair energy function
+This is a fairly straightforward way of defining a derivative with respect to a state.
+\subsection{Bond-Pair Force}
+ and we will apply it to derive the bond force function from the bond-pair energy function
 %
 \begin{align}
 %
@@ -489,6 +488,37 @@ We combine all of these to get the expression for bond force found in \cref{eq:S
 \frac{\tvstate{Y}{}{-\boldsymbol{\xi}}}{|\tvstate{Y}{}{-\boldsymbol{\xi}}|}\right]\notag
 \end{align}
 %
+\subsection{Isotropic Bending Correction}
+To derive the bending ``pressure'' force, we start with the isotropic energy discrepancy
+%
+\begin{equation}
+    W'=2G\frac{h^3}{12}\frac{3\nu-1}{1-\nu}\bar{\boldsymbol{\kappa}}^2. \notag
+\end{equation}
+%
+with
+%
+\begin{align}
+    \bar{\boldsymbol{\kappa}}\left(\vstate{Y}{}{}\right) &= \frac{1}{m} \int_0^\delta \int_0^{2\pi}\omega(\xi)\frac{\vstate{Y}{}{\boldsymbol{\xi}}+\vstate{Y}{}{\boldsymbol{-\xi}}}{\xi^2} \xi {\rm d}\phi {\rm d}\xi \notag \\
+    &= \frac{2}{m} \int_0^\delta \int_0^{2\pi}\omega(\xi)\frac{\vstate{Y}{}{\boldsymbol{\xi}}}{\xi^2} \xi {\rm d}\phi {\rm d}\xi \notag
+\end{align}
+Because $\bar{\boldsymbol{\kappa}}$ is itself a vector-state, we will need to begin with the change in $\bar{\boldsymbol{\kappa}}$ with respect to $\vstate{Y}{}{}$ and carry the result through to find the change in $W'$.
+\begin{align}
+    \bar{\boldsymbol{\kappa}}\left(\vstate{Y}{}{}+\Delta\vstate{Y}{}{}\right) &= \frac{2}{m} \int_0^\delta \int_0^{2\pi}\omega(\xi)\frac{\vstate{Y}{}{\boldsymbol{\xi}}+\Delta\vstate{Y}{}{\boldsymbol{\xi}}}{\xi^2} \xi {\rm d}\phi {\rm d}\xi \notag \\
+    &= \bar{\boldsymbol{\kappa}}\left(\vstate{Y}{}{}\right) + \frac{2}{m} \int_0^\delta \int_0^{2\pi}\omega(\xi)\frac{\Delta\vstate{Y}{}{\boldsymbol{\xi}}}{\xi^2} \xi {\rm d}\phi {\rm d}\xi \notag 
+\end{align}
+%
+%
+\begin{align}
+    W'\left(\vstate{Y}{}{}+\Delta\vstate{Y}{}{}\right) &=2G\frac{h^3}{12}\frac{3\nu-1}{1-\nu}\left[\bar{\boldsymbol{\kappa}}\!\left(\vstate{Y}{}{}+\Delta\vstate{Y}{}{}\right)\right]^2 \notag \\
+    &=2G\frac{h^3}{12}\frac{3\nu-1}{1-\nu} \left\{ \vphantom{\int_0^\delta} \bar{\boldsymbol{\kappa}}\!\left(\vstate{Y}{}{}\right) \cdot \bar{\boldsymbol{\kappa}}\!\left(\vstate{Y}{}{}\right)\right. \notag \\
+    &\phantom{=2G\frac{h^3}{12}\frac{3\nu-1}{1-\nu}} + \frac{4}{m} \int_0^\delta \int_0^{2\pi}\omega(\xi)\frac{\Delta\vstate{Y}{}{\boldsymbol{\xi}}\cdot \bar{\boldsymbol{\kappa}}\!\left(\vstate{Y}{}{}\right)}{\xi^2} \xi {\rm d}\phi {\rm d}\xi \notag \\
+    &\phantom{=2G\frac{h^3}{12}\frac{3\nu-1}{1-\nu}}\left. + \frac{2}{m} \int_0^\delta \int_0^{2\pi}\omega(\xi)\frac{\Delta\vstate{Y}{}{\boldsymbol{\xi}}\cdot \Delta\vstate{Y}{}{\boldsymbol{\xi}}}{\xi^2} \xi {\rm d}\phi {\rm d}\xi\right\} \notag \\
+    &=W'\left(\vstate{Y}{}{}\right)+ 2G\frac{h^3}{12}\frac{3\nu-1}{1-\nu} \frac{4}{m} \frac{\omega(\xi)}{\xi^2} \bar{\boldsymbol{\kappa}}\!\left(\vstate{Y}{}{}\right) \bullet \Delta\vstate{Y}{}{} + o\left(||\Delta\vstate{Y}{}{}||\right)\notag \\
+    \nabla W'\!\left(\vstate{Y}{}{}\right) &= \vstate{T}{}{\boldsymbol{\xi}} =  \frac{8 G}{m} \frac{h^3}{12}\frac{3\nu-1}{1-\nu}\frac{\omega(\xi)}{\xi^2} \bar{\boldsymbol{\kappa}}\notag
+\end{align}
+%
+This demonstrates the bond-length dependent ``pressure'' applied to each point in the neighborhood of a point with average curvature $\bar{\boldsymbol{\kappa}}$.
+
 
 \bibliographystyle{elsarticle-num}
 \bibliography{jogrady_bibdesk}

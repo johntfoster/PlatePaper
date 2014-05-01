@@ -131,10 +131,6 @@
 \pgfusepath{stroke,fill}%
 }%
 \begin{pgfscope}%
-\pgfsys@transformshift{1.331250in}{4.158914in}%
-\pgfsys@useobject{currentmarker}{}%
-\end{pgfscope}%
-\begin{pgfscope}%
 \pgfsys@transformshift{1.912500in}{3.665953in}%
 \pgfsys@useobject{currentmarker}{}%
 \end{pgfscope}%
