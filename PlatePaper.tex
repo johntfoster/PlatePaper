@@ -70,13 +70,13 @@
 \address[utsa]{The University of Texas at San Antonio, One UTSA Circle, San Antonio, TX 78249}
 
 \begin{abstract}
-This paper builds on the peridynamic state based beam model to represent the bending of a Kirckhoff-Love plate.  This model is non-ordinary and derived from the concept of a rotational spring between bonds.
+This paper builds on the peridynamic state-based beam model to represent the bending of a Kirckhoff-Love plate.  This model is non-ordinary and derived from the concept of a rotational spring between bonds.
 A simple extension of the beam model reproduces plate bending with a Poisson ratio of \(\nu=\sfrac{1}{3}\), which can be combined with a 2D linear peridynamic solid model to simulate mixed in-plane and transverse loading.  The addition of an isotropic bending state term extends the model to arbitrary Poisson ratios.
 Simple test cases demonstrate the model's performance.
 \end{abstract}
 
 \begin{keyword}
-peridynamics \sep non-ordinary model \sep non-local model
+peridynamics \sep non-ordinary model \sep non-local model \sep non-local plate
 \end{keyword}
 
 \end{frontmatter}
@@ -141,7 +141,7 @@ Consider the material model illustrated in \cref{fig:SimpleBondpair} in which ev
     \label{fig:SimpleBondpair}
 \end{figure}
 %
-If we call the deformed angle between these bonds \(\theta\), and choose the potential energy of that spring to be \(w(\boldsymbol{\xi}) = \omega(\boldsymbol{\xi})\alpha [1 + \cos(\theta) ] \) for the bond pair $\boldsymbol{\xi}$ and $-\boldsymbol{\xi}$, we can recover the non-ordinary force state proposed by Silling in \cite{silling2007peridynamic} and analyzed in \cite{jogrady2014a} by taking the Fr\'echet derivative. For the derivation and a description of the Fr\'echet derivative see \ref{sec:frechet}.
+If we call the deformed angle between these bonds \(\theta\), and choose the potential energy of that spring to be \(w(\boldsymbol{\xi}) = \omega(\boldsymbol{\xi})\alpha [1 + \cos(\theta) ] \) for the bond pair $\boldsymbol{\xi}$ and $-\boldsymbol{\xi}$, we can recover the non-ordinary force state proposed by Silling in \cite{silling2007peridynamic} and analyzed in \cite{ogrady2014beams} by taking the Fr\'echet derivative. For the derivation and a description of the Fr\'echet derivative see \ref{sec:frechet}.
 %
 \begin{align}
 \label{eq:SillingForceNO}
@@ -206,7 +206,6 @@ If we use a weighting function \(\omega(\boldsymbol{\xi})=\omega(\xi)\) and assu
     W =& \alpha \int_{0}^\delta\int_0^{2 \pi} w\; \xi {\rm d}\phi {\rm d}\xi ,\notag \\
     =& \alpha \frac{3\pi}{8} \left(\kappa_1^2+\kappa_2^2+\frac{2}{3}\kappa_1\kappa_1+\frac{4}{3}\kappa_3^2 \right)\int_{0}^\delta \omega(\xi)\xi^3{\rm d}\xi + \mathcal{O}(\delta^6).\notag 
 \end{align}
-\todo{It's a little unclear how $m$ arrises below from this equation.  Please see if you can make it more clear.} 
 %
 Equating $W$ with the classical Kirchoff plate strain-energy density, $\Omega$, and taking the limit as $\delta \to 0$ we can solve for $\alpha$
 %
@@ -224,7 +223,7 @@ Equating $W$ with the classical Kirchoff plate strain-energy density, $\Omega$, 
 where $G$ is the shear modulus, $h$ is the thickness of the plate, and we have evaluated the classical Kirchoff strain-energy at a Poisson ratio of \(\sfrac{1}{3}\) in order to solve for alpha as a constant.  Because $\alpha$ is inversely proportional to $m$, the energy does not change with varying choices for $\omega$ and $\delta$. It should be noted that the restriction \(\nu=\sfrac{1}{3}\) is the same imposed by the use of a bond based peridynamic model for in-plane deformation of a 2D peridynamic plate. We will show an extension to this model that removes this restriction in Section~\ref{sec:arbitrary}.
 
 \subsection{Combining Bending and Extension Models}
-The bond-pair bending model does not resist in-plane stretching or shear deformation because these deformations preserve the angles between opposite bonds. \todo{This reads a little funny, could we not say: \ldots resist in-plane stretching or shear deformation.}\todo{or you might just say: \dots does not develop membrane forces.}  If these behaviors are expected in combination with bending, a useful model must resist both in-plane and transverse deformations.  To create a plate model that also resists these deformations, i.e.\ a flat shell, we combine the bond-pair model with a two-dimensional version of the original bond-based linearly-elastic peridynamic solid model from \cite{silling2000reformulation}.  In this model, individual bonds act as springs resisting changes in length.
+The bond-pair bending model does not resist in-plane stretching or shear deformation because these deformations preserve the angles between opposite bonds.  If these behaviors are expected in combination with bending, a useful model must resist both in-plane and transverse deformations.  To create a plate model that also resists these deformations, i.e.\ a flat shell, we combine the bond-pair model with a two-dimensional version of the original bond-based linearly-elastic peridynamic solid model from \cite{silling2000reformulation}.  In this model, individual bonds act as springs resisting changes in length.
 %
 \begin{equation}
     \label{eq:bondextension}
@@ -293,15 +292,10 @@ This decomposition method inspires a similar approach to our plate model. To per
 \end{align}
 %
 The discrepancy in energy is proportional to the square of average curvature, \(\frac{\kappa_1+\kappa_2}{2} = \bar{\kappa}\), which we will also refer to as the isotropic curvature.  The isotropic curvature can be envisioned as the portion of the deformation that resembles a hemispherical bowl.  A complete decomposition of bending energy into isotropic and deviatoric components as performed by Fischer in \cite{fischer1992bending} produces a far more complex model and is unnecessary at this time.  For a single bond pair we can represent the curvature vector along the bond pair as 
-%\marginpar{ maybe leave this out and go straight to the curvature vector?}
 %
 \begin{equation}
     \boldsymbol{\kappa} _{\hat{\boldsymbol{\xi}}} = \frac{\vstate{Y}{}{\boldsymbol{\xi}}+\vstate{Y}{}{\boldsymbol{-\xi}}}{|\boldsymbol{\xi}|^2}\notag
 \end{equation}
-%
-%\begin{equation}
-%    \kappa_{\hat{u}} = \frac{z(\mathbf{x}+\xi\hat{u})-2z(\mathbf{x})+z(\mathbf{x}-\xi\hat{u})}{\xi^2}\notag
-%\end{equation}
 %
 For large rotations, we can define an average curvature vector \(\bar{\boldsymbol{\kappa}}\).
 This leads us to model the average curvature as 
@@ -318,7 +312,7 @@ We can rewrite the energy discrepancy in terms of \(\bar{\boldsymbol{\kappa}}\).
     W'=2G\frac{h^3}{12}\frac{3\nu-1}{1-\nu}\bar{\boldsymbol{\kappa}}^2. \notag
 \end{equation}
 %
-We can take the Fr\'{e}chet derivative (details in \ref{sec:frechet})\todo{Can you show the details in the Appendix?  Also, should the $dA$ be there?} to produce a correction force vector state
+We can take the Fr\'{e}chet derivative (details in \ref{sec:frechet}) to produce a correction force vector state
 %
 \begin{equation}
     \vstate{T'}{}{\boldsymbol{\xi}}=\frac{8G}{m}\frac{h^3}{12}\frac{3\nu-1}{1-\nu}\frac{\omega(\boldsymbol{\xi})}{\xi^2} \bar{\boldsymbol{\kappa}},
@@ -333,7 +327,6 @@ A weighting function \(\omega(\boldsymbol{\xi}) = |\boldsymbol{\xi}|\) can ensur
 Discretizing the bond-pair model is primarily matter of exchanging integrals for sums. 
 %
 \begin{align}
-%\label{eq:discreteBeamw}
 w(\boldsymbol{\xi}_i) &= \omega(\boldsymbol{\xi}_i)\alpha \left[1+\cos(\theta(\vstate{Y}{}{\boldsymbol{\xi}_i},\vstate{Y}{}{-\boldsymbol{\xi}_i})) \right] \notag \\
 &\approx \omega(\boldsymbol{\xi}_i)\frac{\alpha}{2}\left(\frac{z(\mathbf{x}+\boldsymbol{\xi}_i)-2z(\mathbf{x})+z(\mathbf{x}-\boldsymbol{\xi}_i)}{\boldsymbol{\xi}_i}\right)^2 \notag
 \end{align}
@@ -341,7 +334,6 @@ w(\boldsymbol{\xi}_i) &= \omega(\boldsymbol{\xi}_i)\alpha \left[1+\cos(\theta(\v
 in which $\boldsymbol{\xi}_i$ is the $i^\textnormal{th}$ bond emanating from the point $\mathbf{x}$ to each of the $n$ points within distance $\delta$ of point $\mathbf{x}$.
 %
 \begin{align}
-%    \label{eq:discretebeam}
     \alpha &= \frac{c\; (\Delta x)^2}{m} ;\; c= \frac{G}{(1-\nu)}\frac{h^3}{12};\; m=\sum_{i=1}^n \omega(\boldsymbol{\xi}_i)\boldsymbol{\xi}_i^2 \implies \nonumber \\
     W&=(\Delta x)^2 \sum_{i=1}^n \omega(\boldsymbol{\xi}_i)\frac{G}{2(1-\nu)}\frac{h^3}{12}\left(\frac{z(\mathbf{x}+\boldsymbol{\xi}_i)-2z(\mathbf{x})+z(\mathbf{x}-\boldsymbol{\xi}_i)}{|\boldsymbol{\xi}_i|}\right)^2 \notag
 \end{align}
