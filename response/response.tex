@@ -1,0 +1,119 @@
+\documentclass{article}
+\usepackage[left=1.0in,right=1.0in,top=1.0in,bottom=1.0in]{geometry}
+\usepackage{fancyhdr}
+\usepackage{color}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{mathtools}
+%\usepackage[normalem]{ulem}
+\usepackage{cancel}
+\definecolor{light-gray}{gray}{0.5}
+
+
+\begin{document}
+
+\begin{center}
+    {\LARGE \bf Point-by-Point Response to Reviewer's Comments} \\
+     Author's Responses in {\color{red} Red}
+\end{center}
+
+%%%% First Reviewer %%%%
+\section{Reviewer}
+%
+\subsection*{Specific Comments}
+
+\begin{enumerate}
+%
+   \item This review took me a long time because I had to first read through Taylor and Steigman (Ref [6]).  After reading [6], I am unsure if the current manuscript is a significant advance.  First, I'll point an error in the text referencing [6] -- this manuscript claims that [6] does not simulate bending but that is incorrect.  Their numerical example indeed is of applied tensile loading, but due to the complex stress distribution, there is wrinkling and out-of-plane deflection which necessarily implies bending.  This should be corrected.  But a bigger question is why the approach in this paper when [6] exists.  [6] has only been applied to bond-based peridynamics, but it is readily extendable to the state-based models.  That approach provides a much more systematic approach to reduce to 3D.  In this paper, one has to compare with standard continuum models and do energy matching.  Suppose one were in a situation where one is unsure of the correct continuum model (e.g. thick
+shells).  Then what do we compare it with?  The approach in [6] has no such issues.
+   {\color{red}
+     \begin{itemize}
+        \item Changed reference to directly mention transverse wrinkling:
+        \begin{quote}This creates a model that can represent thin structures and includes a bending term, \underline{which resists transverse wrinkling behavior in a simulation of} tension loading.
+        \end{quote}
+        \item There are two major factors that make this paper important. 
+        First, the submitted manuscript is clearly original through it’s use of non-ordinary peridynamic material models which have seen little attention in literature (excepting the so-called “correspondence models” which wrap classical stress-strain constitutive laws, here we are referring to “native” peridynamic materials). Only the previous paper on peridynamic beams [15] has applied non-ordinary models to useful engineering practice. These non-ordinary models with their ability to resist rotation and other complex deformations, have no analog in classical continuum mechanics. This alone merits scientific exploration. While here we are using them for plates and shells, their utility could far exceed these simple models. This work lays the foundation for more complex explorations of material behavior in the future. While both the submitted manuscript and [6] arrive at useful models for peridynamic plates and shells, the approach is clearly very different.
+        
+        Second, while the asymptotic approach can be applied to state-based theory, it is not done in [6]. The reason to use a state-based model would be to develop material descriptions capable of modeling materials with arbitrary Poisson ratio. The Poisson ratio of the model developed in [6] is fixed at 1/3, as are all 2D bond-based models. Our model allows for material models of arbitrary Poisson ratio and correctly reproduces the classical results in the limit of vanishing $\delta$. In order to model arbitrary Poisson ratio in a nonlocal model requires a term we we call the “isotropic curvature” in our paper. Because state-based models use functions that describe the totality of deformations of all points in a materials horizon, the “isotropic curvature” is a function of not only the neighbors of $x$, but also the neighbors of $x'$. Following the procedure of [6] would require a Taylor expansion through the thickness of the material, then along the plane about $x'' = x'$, and then a second Taylor expansion through the thickness and integration around $x$. The tractability of this procedure leads us to question how “readily extensible” the approach of [6] is.
+     \end{itemize}
+%        \begin{align*}
+%        \rho \left(\mathbf{\ddot{u}}_0+\zeta \mathbf{\ddot{a}}+\frac{1}{2}\zeta^2\mathbf{\ddot{b}}+\frac{1}{2}\zeta^3 \mathbf{\ddot{c}}+o(\zeta^3)\right) &= \int\limits_{\Omega} \int\limits_{0}^{\epsilon} \mathbf{f}(\eta,\xi,\theta) d\zeta' dA'\notag \\
+%        \theta(\xi) &=  \frac{3}{m} \int\limits_{\Omega} \int\limits_{0}^{\epsilon} \omega(|\xi'|)(\xi'\cdot\eta') \notag \\
+%        \frac{\partial\theta}{\partial \zeta'} &= \frac{3}{m} \int\limits_{\Omega} \int\limits_{0}^{\epsilon} \omega(|\xi'|)(\xi'\cdot\frac{\partial \eta'}{\partial \zeta'}) \notag\\
+%        \end{align*}
+%        \begin{equation}
+%        \frac{\partial\theta}{\partial \zeta'} = \frac{3}{m} \int\limits_{\Omega} \int\limits_{0}^{\epsilon} \omega(|v''|)\xi''\cdot\left[a''(v'+v'')-a'(v')+(\zeta'+\zeta'')b''(v'+v'')-\zeta'b'(v')\right] d\zeta''dA'' \notag\\
+%        \end{equation}
+	}
+  \item A minor issue is on page 10-11.  What is a "circular" $\omega$?  Do you mean it is a function only of $|\xi|$?  Please clarify.  Also clarify what you mean by "odd number of any index".
+   {\color{red}
+     \begin{itemize}
+        \item Made more explicit:
+        \quote{For a circular $\omega(\xi) = \omega(|\xi|)$, combinations of $\{i,j,k,l\}$ with an odd number of each index, such as $\{1,1,1,2\}$ or $\{2,1,2,2\}$, will result in odd powers of sine and cosine and integrate to 0.}
+     \end{itemize}}
+%
+  \item The Appendix on Frechet derivatives is not required; you can simply refer to [1].
+  {\color{red}
+     \begin{itemize}
+        \item response
+     \end{itemize}}
+%
+     \item The title says "plates and flat shells".  What are flat shells??
+  {\color{red}
+     \begin{itemize}
+        \item Shell models resist in-plane or membrane deformations, as opposed to plates, which resist only transverse deformations. This is noted on page 10:
+        \quote{To create a plate model that also resists these deformations, i.e. a flat shell, we combine the bond-pair model with a two-dimensional version of the original bond-based linearly-elastic peridynamic solid model from [10].}
+     \end{itemize}}
+%
+\end{enumerate}
+%
+\subsection*{General Statement}
+In essence, the main difficulty that I have in recommending acceptance is that I do not see this as a significant advance beyond [6].  Perhaps a chance to respond to this and a second round of review will clarify this.
+
+\section{Reviewer}
+\subsection*{General Statement}
+The manuscript is a well-written account of developing a model of plates/shells within the peridynamic mechanic theory.
+
+I have several minor comments and one final comment that is not so minor but can be addressed.
+%
+\subsection*{Specific Comments}
+
+\begin{enumerate}
+
+  \item The authors several times use the phrase "ill-defined". Probably more apt is "undefined". Jump discontinuities are undefined witinh the classical elastic theory.
+%
+     {\color{red}
+     \begin{itemize}
+        \item Changed in all locations
+     \end{itemize}}
+%
+  \item Page 4 uses the phrase "to eliminate" when "mitigate" is more appropriate.
+%
+     {\color{red}
+     \begin{itemize}
+        \item Changed
+     \end{itemize}}
+%
+  \item Pg 5. I don't think we "must" use the concept of peridynamic states. This is  choice. The paper http://dx.doi.org/10.1007/s10659-012-9418-x discusses an alternative formulation of the peridynamic equations for linear elasticity, and is able to precisely describe the class of deformations. And so there is a deeper concept lurking that "must" be modeled.
+%
+     {\color{red}
+     \begin{itemize}
+        \item Eliminated word ``must''
+     \end{itemize}}
+%
+  \item The authors write "This convergence only continues to a minimum horizon, below which the discretized equation of motion (eq. (9)) ceases to accurately approximate the continuous integral formulation (eqs. (1) and (3)). The minimum horizon size depends on the discretization; it appears that twice the node spacing is insufficient, and that three times the node spacing is insufficient." These two sentences suggest that something is awry with the discretization. It seems as if the simple replacement of integrals with sums  is simply to simple to be viable since the horizon depends upon the particle density. Shouldn't these two parameters be separated? Can the authors hold the horizon fixed and let the particle density increase? Except for the potential cost, this would settle the question. Maybe it's a good idea to point out that better numerical methods are needed? Again, the paper http://dx.doi.org/10.1007/s10659-012-9418-x describes a variational formulation; wouldn't this
+form a basis for a conforming FEM?
+%
+     {\color{red}
+     \begin{itemize}
+        \item Replaced figure 6 to show the effect of changing particle density with fixed horizon size. With more cases plotted, it is clearer that results are independent of particle density above a minimum threshold.
+        \item Edited referring sentence to explain the updated plot:
+        \begin{quotation}
+        The difference is evident in fig. 6, which also shows that results are insensitive to fineness of discretization once the minimum horizon criterion is met.
+        \end{quotation}
+     \end{itemize}}
+%
+\end{enumerate}
+
+
+\end{document}
