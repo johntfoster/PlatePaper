@@ -29,21 +29,39 @@ shells).  Then what do we compare it with?  The approach in [6] has no such issu
    {\color{red}
      \begin{itemize}
         \item Changed reference to directly mention transverse wrinkling:
-        \begin{quote}This creates a model that can represent thin structures and includes a bending term, \underline{which resists transverse wrinkling behavior in a simulation of} tension loading.
+        \begin{quote}This creates a model that can represent thin structures and includes a bending term, \underline{which resists transverse wrinkling behavior in a simulation of crack growth under} tension loading.
         \end{quote}
-        \item There are two major factors that make this paper important. 
-        First, the submitted manuscript is clearly original through it’s use of non-ordinary peridynamic material models which have seen little attention in literature (excepting the so-called “correspondence models” which wrap classical stress-strain constitutive laws, here we are referring to “native” peridynamic materials). Only the previous paper on peridynamic beams [15] has applied non-ordinary models to useful engineering practice. These non-ordinary models with their ability to resist rotation and other complex deformations, have no analog in classical continuum mechanics. This alone merits scientific exploration. While here we are using them for plates and shells, their utility could far exceed these simple models. This work lays the foundation for more complex explorations of material behavior in the future. While both the submitted manuscript and [6] arrive at useful models for peridynamic plates and shells, the approach is clearly very different.
+        \item There are two major factors that make this paper important, even though [6] covers some of the same behavior. First, the submitted manuscript is clearly original through it’s use of non-ordinary peridynamic material models which have seen little attention in literature (excepting the so-called “correspondence models” which wrap classical stress-strain constitutive laws, here we are referring to “native” peridynamic materials). Only the previous paper on peridynamic beams [15] has applied non-ordinary models to useful engineering practice. These non-ordinary models with their ability to resist rotation and other complex deformations, have no analog in classical continuum mechanics. This alone merits scientific exploration. While here we are using them for plates and shells, their utility could far exceed these simple models. This work lays the foundation for more complex explorations of material behavior in the future. While both the submitted manuscript and [6] arrive at useful models for peridynamic plates and shells, the approach is clearly very different.
         
-        Second, while the asymptotic approach can be applied to state-based theory, it is not done in [6]. The reason to use a state-based model would be to develop material descriptions capable of modeling materials with arbitrary Poisson ratio. The Poisson ratio of the model developed in [6] is fixed at 1/3, as are all 2D bond-based models. Our model allows for material models of arbitrary Poisson ratio and correctly reproduces the classical results in the limit of vanishing $\delta$. In order to model arbitrary Poisson ratio in a nonlocal model requires a term we we call the “isotropic curvature” in our paper. Because state-based models use functions that describe the totality of deformations of all points in a materials horizon, the “isotropic curvature” is a function of not only the neighbors of $x$, but also the neighbors of $x'$. Following the procedure of [6] would require a Taylor expansion through the thickness of the material, then along the plane about $x'' = x'$, and then a second Taylor expansion through the thickness and integration around $x$. The tractability of this procedure leads us to question how “readily extensible” the approach of [6] is.
+        Second, while the asymptotic approach can be applied to state-based theory, it is not done in [6]. The reason to use a state-based model would be to develop material descriptions capable of modeling materials with arbitrary Poisson ratio. The Poisson ratio of the model developed in [6] is fixed at 1/3, as are all 2D bond-based models. Our model allows for material models of arbitrary Poisson ratio and correctly reproduces the classical results in the limit of vanishing $\delta$. In order to model arbitrary Poisson ratio in a nonlocal model requires a term we we call the “isotropic curvature” in our paper. Following the example of [1], we will call the dilation state $\theta$, and show how its incorporation is nontrivial.
+        \begin{equation*}
+        \rho \left(\mathbf{\ddot{u}}_0+\zeta \mathbf{\ddot{a}}+\frac{1}{2}\zeta^2\mathbf{\ddot{b}}+\frac{1}{2}\zeta^3 \mathbf{\ddot{c}}+o(\zeta^3)\right) = \int\limits_{\Omega} \int\limits_{0}^{\epsilon} \mathbf{f}(\eta,\xi,\theta) d\zeta' dA' \tag{17'}
+        \end{equation*}
+        Because state-based models use functions that describe the totality of deformations of all points in a materials horizon, the dilation is a function of not only the neighbors of $x$, but also the neighbors of $x'$. 
+        Following the procedure of [6] would require an additional Taylor expansion through the thickness of the material,
+        \begin{align*}
+        \theta(\boldsymbol{\xi}) &= \theta_0(\mathbf{v}) + \zeta\boldsymbol{\alpha}(\mathbf{v})+\frac{1}{2}\zeta^2\boldsymbol{\beta}(\mathbf{v})+o(\zeta^3) \notag \\
+        \end{align*}
+        followed by either a nested integral over the material plane, or a Taylor expansion along the plane about $x'' = x'$.
+        \begin{align*}
+        \theta(\xi) &=  \frac{3}{m} \int\limits_{\Omega} \int\limits_{0}^{\epsilon} \omega(|\xi'|)(\xi'\cdot\eta') \notag \\
+        \boldsymbol{\alpha} = \frac{\partial\theta}{\partial \zeta'} &= \frac{3}{m} \int\limits_{\Omega} \int\limits_{0}^{\epsilon} \omega(|\xi'|)(\xi'\cdot\frac{\partial \eta'}{\partial \zeta'}) \notag\\
+        \end{align*}
+        With the introduction of a dilation term $\theta$, Equation (29) gets an additional term:
+        \begin{equation*}
+        	\frac{G}{\partial\zeta'}(\zeta') = 
+	\left(\frac{\partial\mathbf{f}}{\partial\eta_0}\right)\frac{\partial\eta_0}{\partial\zeta'} +
+	\left(\frac{\partial\mathbf{f}}{\partial\xi_0}\right)\frac{\partial\xi_0}{\partial\zeta'} + 
+	\left(\frac{\partial\mathbf{f}}{\partial\theta_0}\right)\frac{\partial\theta_0}{\partial\zeta'} \tag{29'}
+        \end{equation*}
+        \begin{equation}
+        \frac{\partial\theta}{\partial \zeta'} = \frac{3}{m} \int\limits_{\Omega} \int\limits_{0}^{\epsilon} \omega(|\mathbf{v}''|)\left[\mathbf{v}''+\zeta''\mathbf{k}\right]\cdot\left[\mathbf{a}''(\mathbf{v}'+\mathbf{v}'')-\mathbf{a}'(\mathbf{v}')+(\zeta'+\zeta'')\mathbf{b}''(\mathbf{v}'+\mathbf{v}'')-\zeta'\mathbf{b}'(\mathbf{v}')\right] d\zeta''dA'' \notag\\
+        \end{equation}
+        \begin{equation}
+        \frac{\partial\theta_0}{\partial \zeta'} = \frac{3}{m} \int\limits_{\Omega} \int\limits_{0}^{\epsilon} \omega(|\mathbf{v}''+\zeta''\mathbf{k}|)\left[\mathbf{v}''+\zeta''\mathbf{k}\right]\cdot\left[\mathbf{a}''(\mathbf{v}'+\mathbf{v}'')-\mathbf{a}'(\mathbf{v}')+(\zeta'')\mathbf{b}''(\mathbf{v}'+\mathbf{v}'')\right] d\zeta''dA'' \tag{30'c}\\
+        \end{equation}
+         These terms end up inside the larger integrals of equations (37) and (43). While it may be possible to simplify the relationship between $\mathbf{u}$, $\mathbf{a}$, and $\theta$, the tractability of this procedure leads us to question how “readily extensible” the approach of [6] is. 
      \end{itemize}
-%        \begin{align*}
-%        \rho \left(\mathbf{\ddot{u}}_0+\zeta \mathbf{\ddot{a}}+\frac{1}{2}\zeta^2\mathbf{\ddot{b}}+\frac{1}{2}\zeta^3 \mathbf{\ddot{c}}+o(\zeta^3)\right) &= \int\limits_{\Omega} \int\limits_{0}^{\epsilon} \mathbf{f}(\eta,\xi,\theta) d\zeta' dA'\notag \\
-%        \theta(\xi) &=  \frac{3}{m} \int\limits_{\Omega} \int\limits_{0}^{\epsilon} \omega(|\xi'|)(\xi'\cdot\eta') \notag \\
-%        \frac{\partial\theta}{\partial \zeta'} &= \frac{3}{m} \int\limits_{\Omega} \int\limits_{0}^{\epsilon} \omega(|\xi'|)(\xi'\cdot\frac{\partial \eta'}{\partial \zeta'}) \notag\\
-%        \end{align*}
-%        \begin{equation}
-%        \frac{\partial\theta}{\partial \zeta'} = \frac{3}{m} \int\limits_{\Omega} \int\limits_{0}^{\epsilon} \omega(|v''|)\xi''\cdot\left[a''(v'+v'')-a'(v')+(\zeta'+\zeta'')b''(v'+v'')-\zeta'b'(v')\right] d\zeta''dA'' \notag\\
-%        \end{equation}
 	}
   \item A minor issue is on page 10-11.  What is a "circular" $\omega$?  Do you mean it is a function only of $|\xi|$?  Please clarify.  Also clarify what you mean by "odd number of any index".
    {\color{red}
@@ -55,7 +73,7 @@ shells).  Then what do we compare it with?  The approach in [6] has no such issu
   \item The Appendix on Frechet derivatives is not required; you can simply refer to [1].
   {\color{red}
      \begin{itemize}
-        \item response
+        \item While a reference to [1] provides readers with all the necessary tools to verify our derivations, those unfamiliar with Fr\'echet derivatives will find it far easier to follow the appendix.  Because readers are not yet accustomed to this sort of evaluation, especially for trigonometric and compound vector states, we feel that retaining the appendix is a solid compromise between keeping the body of the paper readable and allowing interested readers to quickly verify or imitate our derivations.
      \end{itemize}}
 %
      \item The title says "plates and flat shells".  What are flat shells??
@@ -101,8 +119,7 @@ I have several minor comments and one final comment that is not so minor but can
         \item Eliminated word ``must''
      \end{itemize}}
 %
-  \item The authors write "This convergence only continues to a minimum horizon, below which the discretized equation of motion (eq. (9)) ceases to accurately approximate the continuous integral formulation (eqs. (1) and (3)). The minimum horizon size depends on the discretization; it appears that twice the node spacing is insufficient, and that three times the node spacing is insufficient." These two sentences suggest that something is awry with the discretization. It seems as if the simple replacement of integrals with sums  is simply to simple to be viable since the horizon depends upon the particle density. Shouldn't these two parameters be separated? Can the authors hold the horizon fixed and let the particle density increase? Except for the potential cost, this would settle the question. Maybe it's a good idea to point out that better numerical methods are needed? Again, the paper http://dx.doi.org/10.1007/s10659-012-9418-x describes a variational formulation; wouldn't this
-form a basis for a conforming FEM?
+  \item The authors write "This convergence only continues to a minimum horizon, below which the discretized equation of motion (eq. (9)) ceases to accurately approximate the continuous integral formulation (eqs. (1) and (3)). The minimum horizon size depends on the discretization; it appears that twice the node spacing is insufficient, and that three times the node spacing is insufficient." These two sentences suggest that something is awry with the discretization. It seems as if the simple replacement of integrals with sums  is simply to simple to be viable since the horizon depends upon the particle density. Shouldn't these two parameters be separated? Can the authors hold the horizon fixed and let the particle density increase? Except for the potential cost, this would settle the question. Maybe it's a good idea to point out that better numerical methods are needed? Again, the paper http://dx.doi.org/10.1007/s10659-012-9418-x describes a variational formulation; wouldn't this form a basis for a conforming FEM?
 %
      {\color{red}
      \begin{itemize}
@@ -111,6 +128,7 @@ form a basis for a conforming FEM?
         \begin{quotation}
         The difference is evident in fig. 6, which also shows that results are insensitive to fineness of discretization once the minimum horizon criterion is met.
         \end{quotation}
+        \item The focus of this paper is the model rather than the numerical methods, so we try to leave criticism of existing numerical methods to those working to remedy the situation. That said, using nonlocal vector calculus as the basis of an FEM would seem to handle nonlocality/scale effects, but risks reintroducing mesh dependence to failure analyses.
      \end{itemize}}
 %
 \end{enumerate}
