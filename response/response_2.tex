@@ -1,0 +1,41 @@
+\documentclass{article}
+\usepackage[left=1.0in,right=1.0in,top=1.0in,bottom=1.0in]{geometry}
+\usepackage{fancyhdr}
+\usepackage{color}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{mathtools}
+%\usepackage[normalem]{ulem}
+\usepackage{cancel}
+\definecolor{light-gray}{gray}{0.5}
+
+
+\begin{document}
+
+\begin{center}
+    {\LARGE \bf Point-by-Point Response to Reviewer's Comments} \\
+     Author's Responses in {\color{red} Red}
+\end{center}
+
+%%%% First Reviewer %%%%
+\section*{Reviewer Comments}
+%
+
+\begin{enumerate}
+%
+   \item I am not totally convinced by the authors arguments that the novelty of this paper is sufficiently high as to merit publication in IJSS. There are certainly differences from the approach used in [6], but I that these differences are largely algebraic and not conceptual. Certainly, it will require much tedious algebra to use the asymptotic expansion approach from [6] in a state-based setting. This method on the other hand has a critical difficulty that I pointed out in the first review but was not at all addressed in the response.
+   
+   {\color{red}
+	It’s possible that we were not clear enough in the manuscript, but the differences between this paper and [6] are nearly entirely conceptual, stemming from a completely different way of characterizing bending. In this paper, bending is a fundamental deformation mode, i.e. there are forces that resist angle change, rather than the result of extension deformation that varies through the thickness, i.e. forces that resist only extension, but vary through the thickness. While it may not be the easiest way to represent thin plate bending, it opens the door for continuum analysis of materials that resist bending in different ways. For example, a graphene sheet only one atom thick resists bending without any thickness for displacement to vary along, and a lipid bilayer (sans inclusions) resists isotropic bending but does not resist deviatoric bending at all. Before moving on to these more exotic materials, it is necessary to first build up the simplest models, even if they don’t initially outperform the state of the art for the simplest problems. We started with the simplest possible bending model - the Euler beam in our previous paper [15], and this paper extends that work to the simplest 2D model - a Kirchhoff plate. The goal is that this model will serve as a foundation for models that hopefully outperform the state of the art in their ability to simulate bending behavior for new, complex materials, e.g. meta-materials.
+	}
+  \item In this paper, one has to compare with standard continuum models and do energy matching. Suppose one were in a situation where one is unsure of the correct continuum model (e.g. thick shells). Then what do we compare it with? The approach in [6] has no such issues.”
+  
+   {\color{red}
+     The ability to model thick shells is an advantage of [6] over our work, just as the ability to model arbitrary Poisson’s ratios is an advantage of our work over [6]. That said, it just pushes the energy matching back one step, because the bond-based peridynamic solid model is produced by energy matching with a classical solid material. Please see Silling and Askari (2004), Equation 22, where the constitutive model used in [6] is clearly arrived at by energy matching. Other departures from Kirchhoff plate theory, such as nonlinear material behavior, are harder to incorporate with the thickness integral. For example, the damage model in [6] is a function of bottom-plane extension. If only the extension of the bottom surface is compared to a critical stretch, then downward curvature will never result in damage - the plate could be rolled into a cylinder without failing in one direction, and the same deformation in the opposite direction would produce failure. This is likely acceptable in a model that is used to handle bending components of a deformation that is primarily in-plane, but would have to be modified in a scenario where failure is expected to occur due to excessive bending. Moving the plane to the center or top only changes the type of bending that results in no extension of the tracked plane. This would also be a concern for damage that does not completely penetrate the plate. The model presented in this paper offers a way to handle failure in these scenarios.}
+%
+%
+\end{enumerate}
+%
+
+
+\end{document}
