@@ -3,6 +3,8 @@ Plate Paper
 
 Collaborative journal paper on peridynamic plates
 
+Made public after publication see DOI:[10.1016/j.ijsolstr.2014.09.003](http://dx.doi.org/10.1016/j.ijsolstr.2014.09.003)
+
 
 To clone:
 
